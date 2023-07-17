@@ -1,8 +1,5 @@
 package com.novare.inventoryManager.menus.cashierMenu;
 
-import com.novare.inventoryManager.employees.EmployeeRole;
-import com.novare.inventoryManager.menus.cashierMenu.CashierMenuModel;
-import com.novare.inventoryManager.menus.cashierMenu.CashierMenuView;
 import com.novare.inventoryManager.utils.Menu;
 
 import java.util.Scanner;

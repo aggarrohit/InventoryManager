@@ -7,7 +7,6 @@ import com.novare.inventoryManager.employees.EmployeeRole;
 import com.novare.inventoryManager.menus.adminMenu.AdminMenu;
 import com.novare.inventoryManager.menus.cashierMenu.CashierMenu;
 import com.novare.inventoryManager.menus.managerMenu.ManagerMenu;
-import com.novare.inventoryManager.utils.ConsoleMessage;
 import com.novare.inventoryManager.utils.Menu;
 import com.novare.inventoryManager.utils.Storage;
 

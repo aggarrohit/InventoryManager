@@ -36,16 +36,8 @@ public class Employee implements Serializable {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     public String getSocialNumber() {
         return socialNumber;
-    }
-
-    public void setSocialNumber(String socialNumber) {
-        this.socialNumber = socialNumber;
     }
 
     public String getPassword() {
