@@ -15,7 +15,7 @@ public class Employee implements Serializable {
     private BigDecimal salary;
     private EmployeeRole role;
     private static final long serialVersionUID = 1496276507263397484L;
-    private final String DEFAULT_PASSWORD = PasswordHasher.hashPassword("qwerty123");
+    private final String DEFAULT_PASSWORD = PasswordHasher.hashPassword("MyPassword123");
 
 
     public Employee(String fullName, String socialNumber, BigDecimal salary, EmployeeRole role) throws NoSuchAlgorithmException {
@@ -57,5 +57,4 @@ public class Employee implements Serializable {
     public void setRole(EmployeeRole role) {
         this.role = role;
     }
-
 }

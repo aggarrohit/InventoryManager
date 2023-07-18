@@ -7,6 +7,6 @@ import java.security.NoSuchAlgorithmException;
 public class Authenticator {
     private Authenticator() {}
     public static boolean logIn(Employee employee, String password) throws NoSuchAlgorithmException {
-        return Validator.validatePassword(employee.getPassword(), password);
+        return Validator.validateStoredPassword(employee.getPassword(), password);
     }
 }

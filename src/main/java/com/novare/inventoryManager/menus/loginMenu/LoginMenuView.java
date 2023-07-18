@@ -41,7 +41,15 @@ class LoginMenuView {
     public void printChangePasswordOption() {
         ConsoleMessage.showInfoMessage("Please change your password: ");
     }
-//    void printLoginError() {
-//        ConsoleMessage.showErrorMessage("Login failed. Please try again");
-//    }
+
+    public void printChangePasswordRequest() {
+        Menu.printLine();
+        printChangePasswordOption();
+        printRequiredPasswordFormat();
+        Menu.printLine();
+    }
+    public void printRequiredPasswordFormat() {
+        ConsoleMessage.showInfoMessage("Password should contain at least 1 uppercase letter, 1 lowercase letter, 1 digit, and be at least 8 characters long.");
+    }
+
 }

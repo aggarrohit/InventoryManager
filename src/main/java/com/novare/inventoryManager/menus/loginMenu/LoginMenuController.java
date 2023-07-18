@@ -2,6 +2,7 @@ package com.novare.inventoryManager.menus.loginMenu;
 
 import com.novare.inventoryManager.auth.Authenticator;
 import com.novare.inventoryManager.auth.PasswordHasher;
+import com.novare.inventoryManager.auth.Validator;
 import com.novare.inventoryManager.employees.Employee;
 import com.novare.inventoryManager.employees.EmployeeRole;
 import com.novare.inventoryManager.menus.adminMenu.AdminMenu;
@@ -75,18 +76,24 @@ class LoginMenuController {
     }
 
     private void changePassword(Employee employee) throws NoSuchAlgorithmException {
-        view.printChangePasswordOption();
-        String newPassword = getCustomerPassword(view.NEW_PASSWORD_REQUEST);
-        if (newPassword == null) {
-            view.printPasswordError();
-            return;
+        while(true) {
+            view.printChangePasswordRequest();
+            String newPassword = getCustomerPassword(view.NEW_PASSWORD_REQUEST);
+
+            try {
+                if(Validator.validatePasswordFormat(newPassword)) {
+                    String hashedPassword = PasswordHasher.hashPassword(newPassword);
+                    employee.setPassword(hashedPassword);
+                    storage.updateEmployee(employee);
+                    view.printPasswordChangeSuccess();
+                    break;
+                }
+            } catch (IllegalArgumentException exception) {
+                Menu.printInvalidOption();
+            }
+
         }
 
-        String hashedPassword = PasswordHasher.hashPassword(newPassword);
-        employee.setPassword(hashedPassword);
-        storage.updateEmployee(employee);
-
-        view.printPasswordChangeSuccess();
     }
      private String getCustomerPassword(String passwordRequest) {
         Console console = System.console();
