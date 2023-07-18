@@ -7,8 +7,9 @@ class ManagerMenuModel {
             "View the inventory products/entries",
             "Generate a report",
             "Add a new product",
-            "Add orders to the orders list",
-            "Add receipts",
+            "Create a purchase order",
+            "Update product threshold quantity",
+            "Update product price",
             "Open the group chat",
             "Sign out"
     );
