@@ -11,19 +11,17 @@ public class Employee implements Serializable {
     private UUID id;
     private String fullName;
     private String socialNumber;
-    private String employmentNumber;
     private String password;
     private BigDecimal salary;
     private EmployeeRole role;
     private static final long serialVersionUID = 1496276507263397484L;
-    private final String DEFAULT_PASSWORD = PasswordHasher.hashPassword("qwerty123"); // review
+    private final String DEFAULT_PASSWORD = PasswordHasher.hashPassword("qwerty123");
 
 
-    public Employee(String fullName, String socialNumber, String employmentNumber, BigDecimal salary, EmployeeRole role) throws NoSuchAlgorithmException {
+    public Employee(String fullName, String socialNumber, BigDecimal salary, EmployeeRole role) throws NoSuchAlgorithmException {
         this.id = UUID.randomUUID();
         this.fullName = fullName;
         this.socialNumber = socialNumber;
-        this.employmentNumber = employmentNumber;
         this.password = DEFAULT_PASSWORD;
         this.salary = salary;
         this.role = role;
@@ -50,9 +48,6 @@ public class Employee implements Serializable {
 
     public String getDefaultPassword() {
         return DEFAULT_PASSWORD;
-    }
-    public BigDecimal getSalary() {
-        return salary;
     }
 
     public EmployeeRole getRole() {

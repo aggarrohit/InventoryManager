@@ -74,10 +74,9 @@ class AdminMenuController {
         while (true) {
             String fullName = Menu.getInput(view.FULL_NAME_REQUEST);
             String socialNumber = Menu.getInput(view.SOCIAL_NUMBER_REQUEST);
-            String employmentNumber = Menu.getInput(view.EMPLOYMENT_NUMBER_REQUEST);
             BigDecimal salary = new BigDecimal(Menu.getInput(view.SALARY_REQUEST));
 
-            newEmployee = registrator.registerEmployee(fullName, socialNumber, employmentNumber, salary, role);
+            newEmployee = registrator.registerEmployee(fullName, socialNumber, salary, role);
 
             if (newEmployee != null) {
                view.printRegisterSuccessMessage();

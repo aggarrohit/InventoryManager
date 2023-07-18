@@ -15,7 +15,7 @@ public class Registrator {
         this.storage = new Storage();
     }
 
-    public Employee registerEmployee(String fullName, String socialNumber, String employmentNumber,  BigDecimal salary, EmployeeRole role) throws NoSuchAlgorithmException {
+    public Employee registerEmployee(String fullName, String socialNumber, BigDecimal salary, EmployeeRole role) throws NoSuchAlgorithmException {
         if(!Validator.validateSocialNumber(socialNumber)) {
             registrationFailedMessage();
             invalidSocialNumberWarning();
@@ -28,7 +28,7 @@ public class Registrator {
             personExistWarning();
             return null;
         }
-        Employee newEmployee = new Employee(fullName, socialNumber, employmentNumber, salary, role);
+        Employee newEmployee = new Employee(fullName, socialNumber, salary, role);
         storage.saveEmployee(newEmployee);
 
         return newEmployee;
