@@ -14,7 +14,6 @@ public class Validator {
     public static boolean validateStoredPassword(String storedPassword, String inputPassword) throws NoSuchAlgorithmException {
         String hashedPassword = PasswordHasher.hashPassword(inputPassword);
         return storedPassword.equals(hashedPassword);
-
     }
 
     public static boolean validatePasswordFormat(String inputPassword) throws IllegalArgumentException {

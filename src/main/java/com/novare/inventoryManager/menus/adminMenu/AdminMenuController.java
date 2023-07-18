@@ -1,6 +1,7 @@
 package com.novare.inventoryManager.menus.adminMenu;
 
 import com.novare.inventoryManager.auth.Registrator;
+import com.novare.inventoryManager.auth.Validator;
 import com.novare.inventoryManager.employees.Employee;
 import com.novare.inventoryManager.employees.EmployeeRole;
 import com.novare.inventoryManager.utils.Menu;
@@ -73,8 +74,27 @@ class AdminMenuController {
 
         while (true) {
             String fullName = Menu.getInput(view.FULL_NAME_REQUEST);
+
             String socialNumber = Menu.getInput(view.SOCIAL_NUMBER_REQUEST);
-            BigDecimal salary = new BigDecimal(Menu.getInput(view.SALARY_REQUEST));
+            while(!Validator.validateSocialNumber(socialNumber)) {
+                Menu.printInvalidOption();
+                socialNumber = Menu.getInput(view.SOCIAL_NUMBER_REQUEST);
+            }
+
+            BigDecimal salary;
+            while (true) {
+                try {
+                    salary = new BigDecimal(Menu.getInput(view.SALARY_REQUEST));
+                    if (salary.compareTo(BigDecimal.ZERO) <= 0) {
+                        view.printInvalidSalary();
+                    }
+                    else {
+                        break;
+                    }
+                } catch (NumberFormatException e) {
+                    view.printInvalidSalary();
+                }
+            }
 
             newEmployee = registrator.registerEmployee(fullName, socialNumber, salary, role);
 
