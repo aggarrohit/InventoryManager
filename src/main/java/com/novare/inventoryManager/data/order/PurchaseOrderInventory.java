@@ -1,12 +1,9 @@
 package com.novare.inventoryManager.data.order;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.UUID;
+import java.util.*;
 
 public class PurchaseOrderInventory {
-    private final List<PurchaseOrders> purchaseOrders=new ArrayList<>();
+    private final List<PurchaseOrders> purchaseOrders= Collections.synchronizedList(new ArrayList<>());
 
     public  List<PurchaseOrders> getPurchaseOrders() {
         return purchaseOrders;
@@ -27,7 +24,7 @@ public class PurchaseOrderInventory {
     public PurchaseOrders getPurchaseOrderByIndex(int index) {
         return purchaseOrders.get(index);
     }
-    public void addPurchaseOrder(PurchaseOrders purchaseOrder){
+    public synchronized void addPurchaseOrder(PurchaseOrders purchaseOrder){
         purchaseOrders.add(purchaseOrder);
     }
 

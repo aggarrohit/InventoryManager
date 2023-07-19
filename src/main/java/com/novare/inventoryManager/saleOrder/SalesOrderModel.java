@@ -10,7 +10,7 @@ import java.util.UUID;
 public class SalesOrderModel {
     private final SalesOrderInventory salesOrderInventory = new SalesOrderInventory();
 
-    public void addSalesOrderToOrderInventory(List<SalesOrder> salesOrder) {
+    public synchronized void addSalesOrderToOrderInventory(List<SalesOrder> salesOrder) {
         salesOrderInventory.addSaleOrder(new SalesOrders(salesOrder));
     }
     public List<SalesOrders> getSalesOrderList(){
@@ -20,7 +20,7 @@ public class SalesOrderModel {
         return Inventory.getProducts();
     }
 
-    public void updateProductQuantityById(UUID productId, BigDecimal quantity,Boolean isPurchase) {
-        Inventory.updateProductQuantityById(productId, quantity,isPurchase);
+    public synchronized void updateProductQuantityById(UUID productId, BigDecimal quantity) {
+        Inventory.updateProductQuantityById(productId, quantity);
     }
 }

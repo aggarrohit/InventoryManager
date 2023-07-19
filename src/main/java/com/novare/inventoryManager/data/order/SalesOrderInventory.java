@@ -1,14 +1,17 @@
 package com.novare.inventoryManager.data.order;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.UUID;
+import java.io.*;
+import java.util.*;
 
 public class SalesOrderInventory {
-    private final List<SalesOrders> salesOrders =new ArrayList<>();
+    private static final String PATH_TO_SalesOrderINVENTORY_FILE = "salesOrderInventory.txt";
+    private final List<SalesOrders> salesOrders = Collections.synchronizedList(new ArrayList<>());
 
-    public  List<SalesOrders> getSaleOrders() {
+    public SalesOrderInventory() {
+     //   loadSalesOrdersFromFile(PATH_TO_SalesOrderINVENTORY_FILE);
+    }
+
+    public List<SalesOrders> getSaleOrders() {
         return salesOrders;
     }
 
@@ -24,14 +27,18 @@ public class SalesOrderInventory {
         }
         return result;
     }
+
     public SalesOrders getSaleOrderByIndex(int index) {
         return salesOrders.get(index);
     }
-    public void addSaleOrder(SalesOrders saleOrder){
-        salesOrders.add(saleOrder);
-    }
 
+    public synchronized void addSaleOrder(SalesOrders saleOrder) {
+        salesOrders.add(saleOrder);
+        //saveSalesOrdersToFile(PATH_TO_SalesOrderINVENTORY_FILE);
+    }
     public int SaleOrderInventoryCount() {
         return salesOrders.size();
     }
+
+    // Method to save all sales orders to a text file
 }
