@@ -1,5 +1,7 @@
 package com.novare.inventoryManager.notification;
 
+import com.novare.inventoryManager.utils.Utilities;
+
 import java.util.Date;
 import java.util.UUID;
 

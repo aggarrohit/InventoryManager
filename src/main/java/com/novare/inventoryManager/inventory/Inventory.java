@@ -1,9 +1,13 @@
 package com.novare.inventoryManager.inventory;
 
+import com.novare.inventoryManager.notification.Notification;
 import com.novare.inventoryManager.product.Product;
+import com.novare.inventoryManager.utils.Table;
+import com.novare.inventoryManager.utils.Utilities;
 
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Inventory {
@@ -63,31 +67,34 @@ public class Inventory {
 
     public static void printTable(List<Product> inventory) {
 
-        printHeader();
-        String transactionsTableFormat = "%-7s %-25s %-12s %-12s %-15s %-15s%n";
-        System.out.printf(transactionsTableFormat, "Sr.No.","Name", "Qty.", "Unit", "Price", "Threshold Qty.");
-        printSeparatorLine();
-        for (int i = 0; i < inventory.size(); i++) {
-            Product product = inventory.get(i);
-            System.out.printf(transactionsTableFormat,
-                    i+1,
-                    product.product_name(),
-                    product.quantity(),
-                    product.measurement(),
-                    product.price(),
-                    product.threshold_qty()
-                    );
+        List<Integer> columnWidths = List.of(7, 25, 12, 12, 15, 15);
+        List<String> headers = List.of("Sr.No.","Name", "Qty.", "Unit", "Price", "Threshold Qty.");
+        List<List<String>> body = parseInventory(inventory);
+        Table table = new Table(columnWidths, headers, body,"Inventory");
+
+        table.showData();
+
+    }
+
+    private static List<List<String>> parseInventory(List<Product> inventory) {
+        List<List<String>> result = new ArrayList<>();
+
+        int sr_no = 0;
+        for (Product product: inventory) {
+            sr_no++;
+            String srNo = String.valueOf(sr_no);
+            String name = product.product_name();
+            String quantity = product.quantity().toString();
+            String measurement = product.measurement().getMeasurement();
+            String price = product.price().toString();
+            String threshold_qty = product.threshold_qty().toString();
+            List<String> data = List.of(srNo,name,quantity,measurement,price,threshold_qty);
+
+            result.add(data);
         }
-        printSeparatorLine();
+
+        return result;
     }
 
-    private static void printSeparatorLine(){
-        System.out.println("------------------------------------------------------------------------------------------");
-    }
 
-    private static void printHeader(){
-        printSeparatorLine();
-        System.out.println("*************************************** Inventory ***************************************");
-        printSeparatorLine();
-    }
 }

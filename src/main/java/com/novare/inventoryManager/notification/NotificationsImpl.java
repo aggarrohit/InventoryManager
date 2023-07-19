@@ -1,5 +1,9 @@
 package com.novare.inventoryManager.notification;
 
+import com.novare.inventoryManager.utils.Table;
+import com.novare.inventoryManager.utils.Utilities;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -18,30 +22,34 @@ public class NotificationsImpl implements INotifications{
         return NotificationFileHelper.getNotifications();
     }
 
+
     @Override
     public void printNotifications(List<Notification> notifications) {
-        printHeader();
-        String tableFormat = "%-7s %-55s %-20s%n";
-        System.out.printf(tableFormat, "Sr.No.","Notification", "Date & Time");
-        printSeparatorLine();
-        for (int i = 0; i < notifications.size(); i++) {
-            Notification notification = notifications.get(i);
-            System.out.printf(tableFormat,
-                    i+1,
-                    notification.text(),
-                    Utilities.formatDate(notification.date_time())
-            );
+
+        List<Integer> columnWidths = List.of(7, 55, 20);
+        List<String> headers = List.of("Sr.No.","Notification", "Date & Time");
+        List<List<String>> body = parseNotification(notifications);
+        Table table = new Table(columnWidths, headers, body,"Notifications");
+
+        table.showData();
+
+    }
+
+    private List<List<String>> parseNotification(List<Notification> notifications) {
+        List<List<String>> result = new ArrayList<>();
+
+        int sr_no = 0;
+        for (Notification notification: notifications) {
+            sr_no++;
+            String srNo = String.valueOf(sr_no);
+            String text = notification.text();
+            String date_time = Utilities.formatDate(notification.date_time());
+            List<String> data = List.of(srNo,text,date_time);
+
+            result.add(data);
         }
-        printSeparatorLine();
+
+        return result;
     }
 
-    private static void printSeparatorLine(){
-        System.out.println("------------------------------------------------------------------------------------------");
-    }
-
-    private static void printHeader(){
-        printSeparatorLine();
-        System.out.println("*************************************** Notifications ***************************************");
-        printSeparatorLine();
-    }
 }

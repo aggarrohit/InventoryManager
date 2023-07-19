@@ -1,11 +1,11 @@
-package com.novare.inventoryManager.notification;
+package com.novare.inventoryManager.utils;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.util.Date;
 
-import static com.novare.inventoryManager.notification.Utilities.convertDateTimeToLong;
-import static com.novare.inventoryManager.notification.Utilities.convertStringToDateTime;
+import static com.novare.inventoryManager.utils.Utilities.convertDateTimeToLong;
+import static com.novare.inventoryManager.utils.Utilities.convertStringToDateTime;
 
 class UtilitiesTest {
 

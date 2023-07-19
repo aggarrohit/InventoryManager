@@ -1,6 +1,8 @@
 package com.novare.inventoryManager.notification;
 
 
+import com.novare.inventoryManager.utils.Utilities;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

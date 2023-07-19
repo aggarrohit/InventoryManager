@@ -38,9 +38,6 @@ public class InventoryFileHelper {
             BufferedWriter writer = new BufferedWriter(new FileWriter(PATH_TO_INVENTORY_FILE, true));
             writer.write(product+System.lineSeparator());
 
-            //remove this
-            checkInventoryThreshold(product);
-
             writer.close();
 
         } catch (IOException e) {
@@ -157,7 +154,6 @@ public class InventoryFileHelper {
     private static void addProductNotification(Product product) {
         NotificationsImpl notificationsImpl = new NotificationsImpl();
         notificationsImpl.createNotification(product.product_name()+" threshold quantity reached.",product.id());
-        notificationsImpl.printNotifications(notificationsImpl.getNotifications());
     }
 
     private static Product getProductByProductId(UUID productId) throws IndexOutOfBoundsException{

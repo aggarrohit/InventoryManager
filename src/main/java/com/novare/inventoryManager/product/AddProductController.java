@@ -29,14 +29,12 @@ public class AddProductController {
     }
 
     private void proceedForProductInputs(){
-        Inventory.listInventory();
         requestProductName();
         askMeasurement();
         askThresholdQuantity();
         askPrice();
         createProduct();
         addProductView.showSuccessMessage();
-        Inventory.listInventory();
     }
 
     private void createProduct() {

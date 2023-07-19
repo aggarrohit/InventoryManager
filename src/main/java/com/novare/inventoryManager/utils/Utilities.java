@@ -1,15 +1,15 @@
-package com.novare.inventoryManager.notification;
+package com.novare.inventoryManager.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Utilities {
-    public static long convertDateTimeToLong(Date date_time){
-        return date_time.getTime();
+
+    private Utilities() {
     }
 
-    public static Date convertLongToDateTime(Long date_time){
-        return new Date(date_time);
+    public static long convertDateTimeToLong(Date date_time){
+        return date_time.getTime();
     }
 
     public static Date convertStringToDateTime(String date_time){

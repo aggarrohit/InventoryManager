@@ -5,3 +5,5 @@ f91dabf6-791f-4dcd-83bb-1af84d0c981c,noti not,pc,0,2,1
 4ef8f7cf-0ab7-4dea-9b86-2ace7732d825,noti test,pc,2,5,1
 92d9fe51-7c93-4caa-8366-1fac5c7e5a2a,vfgb,pc,0,0,1
 3d08128b-9ec0-4e00-a46c-058d971d5b71,no noti,pc,0,2,2
+b7136818-d12c-4c40-bd4b-532882a8a3e0,test product inv,kg,2,5,25
+e0ff7e90-e658-4d96-8370-262ab5cfec35,test product notification,kg,6,5,25
