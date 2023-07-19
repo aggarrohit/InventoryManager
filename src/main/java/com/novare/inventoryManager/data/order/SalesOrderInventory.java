@@ -1,6 +1,5 @@
 package com.novare.inventoryManager.data.order;
 
-import java.io.*;
 import java.util.*;
 
 public class SalesOrderInventory {
@@ -34,11 +33,8 @@ public class SalesOrderInventory {
 
     public synchronized void addSaleOrder(SalesOrders saleOrder) {
         salesOrders.add(saleOrder);
-        //saveSalesOrdersToFile(PATH_TO_SalesOrderINVENTORY_FILE);
     }
     public int SaleOrderInventoryCount() {
         return salesOrders.size();
     }
-
-    // Method to save all sales orders to a text file
 }

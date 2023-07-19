@@ -1,8 +1,10 @@
 package com.novare.inventoryManager.purchaseOrder;
 
 import com.novare.inventoryManager.data.order.PurchaseOrder;
-import com.novare.inventoryManager.data.inventory.Product;
+import com.novare.inventoryManager.product.Product;
 
+
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.time.LocalDate;
@@ -19,7 +21,7 @@ public class PurchaseOrderController {
         this.view = view;
     }
 
-    public void createPurchaseOrder() {
+    public void createPurchaseOrder() throws FileNotFoundException {
         List<PurchaseOrder> purchaseOrder = Collections.synchronizedList(new ArrayList<>());
         List<Product> inventory = model.getInventoryProducts();
         view.displayInventory(inventory);
@@ -41,7 +43,7 @@ public class PurchaseOrderController {
             }
             String companyName = view.getInput("Enter the Company name: ");
             BigDecimal price = view.getBigDecimalNumericUserInput("\n The sales price is , "
-                    +selectedProduct.getPrice() +"\n Enter the purchase price:");
+                    +selectedProduct.price() +"\n Enter the purchase price:");
             if (price.doubleValue() <= 0) {
                 view.displayErrorMessage("Enter a valid price.");
                 continue;
@@ -55,8 +57,8 @@ public class PurchaseOrderController {
             //  UpdateQuantity(order.getProduct().getId(), order.getOrderQuantity())
             for (PurchaseOrder order :
                     purchaseOrder) {
-                    model.updateProductQuantityById(order.getProduct().getId(),
-                            order.getProduct().getQuantity().add(order.getOrderQuantity()));
+                    model.updateProductQuantityById(order.getProduct().id(),
+                            order.getProduct().quantity().add(order.getOrderQuantity()));
             }
             model.addPurchaseOrderToOrderInventory(purchaseOrder);
         }

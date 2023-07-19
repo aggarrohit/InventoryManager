@@ -1,6 +1,6 @@
 package com.novare.inventoryManager.saleOrder;
 
-import com.novare.inventoryManager.data.inventory.Product;
+import com.novare.inventoryManager.product.Product;
 import com.novare.inventoryManager.data.order.SalesOrder;
 
 import java.math.BigDecimal;
@@ -18,7 +18,7 @@ public class SalesOrderView {
         System.out.println("Inventory:");
         for (int i = 0; i < inventoryProducts.size(); i++) {
             Product product = inventoryProducts.get(i);
-            System.out.println(i + 1 + ". " + product.getName() + " (Quantity: " + product.getQuantity() + ")");
+            System.out.println(i + 1 + ". " + product.product_name() + " (Quantity: " + product.quantity() + ")");
         }
         System.out.println();
     }
@@ -32,9 +32,9 @@ public class SalesOrderView {
         return null;
     }
     public void displayInventoryItem(Product product) {
-        System.out.println("Item: " + product.getName());
-        System.out.println("Quantity: " + product.getQuantity());
-        System.out.println("PurchasePrice: " + product.getPrice());
+        System.out.println("Item: " + product.product_name());
+        System.out.println("Quantity: " + product.quantity());
+        System.out.println("PurchasePrice: " + product.price());
     }
 
     public boolean getYesNoUserInput(String prompt) {
@@ -63,7 +63,7 @@ public class SalesOrderView {
             System.out.println("Customer: " + soldItem.getCustomerName());
             System.out.println("Items:");
             Product product = soldItem.getProduct();
-            System.out.println("- " + product.getName() + " (Quantity: " + soldItem.getOrderQuantity() + ")");
+            System.out.println("- " + product.product_name() + " (Quantity: " + soldItem.getOrderQuantity() + ")");
         }
     }
 

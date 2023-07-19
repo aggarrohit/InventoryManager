@@ -1,7 +1,8 @@
 package com.novare.inventoryManager.purchaseOrder;
 
-import com.novare.inventoryManager.data.inventory.Measurement;
-import com.novare.inventoryManager.data.inventory.Product;
+import com.novare.inventoryManager.product.Product;
+import com.novare.inventoryManager.inventory.Measurement;
+
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -18,8 +19,8 @@ public class PurchaseOrderView {
         System.out.println("Inventory:");
         for (int i = 0; i < inventoryProducts.size(); i++) {
             Product product = inventoryProducts.get(i);
-            System.out.println(i + 1 + ". " + product.getName() + " (Quantity: " + product.getQuantity()
-                    +" "+product.getMeasurement()+" )");
+            System.out.println(i + 1 + ". " + product.product_name() + " (Quantity: " + product.quantity()
+                    +" "+product.measurement()+" )");
         }
     }
     public boolean getYesNoUserInput(String prompt) {
@@ -45,13 +46,13 @@ public class PurchaseOrderView {
         int choice = getIntNumericUserInput("Enter measure type id between 1 and 3 (1=Quantity, 2=Liters, 3=Kilogram): ");
         switch (choice) {
             case 1 -> {
-                return Measurement.Pieces;
+                return Measurement.PIECES;
             }
             case 2 -> {
-                return Measurement.Liter;
+                return Measurement.LITRES;
             }
             case 3 -> {
-                return Measurement.Kilogram;
+                return Measurement.KILOGRAMS;
             }
             default -> {
                 displayInvalidInputMessage();

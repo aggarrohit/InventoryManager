@@ -1,6 +1,6 @@
 package com.novare.inventoryManager.data.order;
 
-import com.novare.inventoryManager.data.inventory.Product;
+import com.novare.inventoryManager.product.Product;
 
 import java.math.BigDecimal;
 

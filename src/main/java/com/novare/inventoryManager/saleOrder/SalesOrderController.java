@@ -1,8 +1,9 @@
 package com.novare.inventoryManager.saleOrder;
 
-import com.novare.inventoryManager.data.inventory.Product;
+import com.novare.inventoryManager.product.Product;
 import com.novare.inventoryManager.data.order.SalesOrder;
 
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +20,7 @@ public class SalesOrderController {
         this.view = view;
     }
 
-    public synchronized void createSalesOrder() {
+    public synchronized void createSalesOrder() throws FileNotFoundException {
         List<SalesOrder> salesOrder = Collections.synchronizedList(new ArrayList<>());
         List<Product> inventory = model.getInventoryProducts();
         view.displayInventory(inventory);
@@ -38,7 +39,7 @@ public class SalesOrderController {
                 continue;
             }
             Product selectedProduct = inventory.get(itemNumber - 1);
-            BigDecimal availableQuantity = selectedProduct.getQuantity();
+            BigDecimal availableQuantity = selectedProduct.quantity();
             view.displayInventoryItem(selectedProduct);
 
             BigDecimal quantity = view.getBigDecimalNumericUserInput("Enter the quantity: ");
@@ -49,7 +50,7 @@ public class SalesOrderController {
                 view.displayErrorMessage("Insufficient quantity. Available: " + availableQuantity);
                 continue;
             }
-            salesOrder.add(new SalesOrder(selectedProduct, quantity, date.toString(), customerName, selectedProduct.getPrice()));
+            salesOrder.add(new SalesOrder(selectedProduct, quantity, date.toString(), customerName, selectedProduct.price()));
             wantsToAddMoreItems = view.getYesNoUserInput("Do you want to add more items? (Y/N): ");
         }
 
@@ -58,8 +59,8 @@ public class SalesOrderController {
                 //  UpdateQuantity(order.getProduct().getId(), order.getOrderQuantity())
                 for (SalesOrder soldItem : salesOrder) {
 
-                    model.updateProductQuantityById(soldItem.getProduct().getId(),
-                            soldItem.getProduct().getQuantity().subtract(soldItem.getOrderQuantity()));
+                    model.updateProductQuantityById(soldItem.getProduct().id(),
+                            soldItem.getProduct().quantity().subtract(soldItem.getOrderQuantity()));
                 }
                 model.addSalesOrderToOrderInventory(salesOrder);
         }
