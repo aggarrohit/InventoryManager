@@ -20,11 +20,7 @@ public class PasswordHasherTest {
     @Test
     void testHashNullPassword() {
         String password = null;
-
-        Assertions.assertThrows(NoSuchAlgorithmException.class, () -> {
-            PasswordHasher.hashPassword(password);
-        });
+        Assertions.assertThrows(NoSuchAlgorithmException.class, () -> PasswordHasher.hashPassword(password));
     }
-
 }
 

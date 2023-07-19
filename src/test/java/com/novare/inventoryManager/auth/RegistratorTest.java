@@ -69,6 +69,7 @@ public class RegistratorTest {
         Employee newEmployee = registrator.registerEmployee(fullName2, socialNumber2, salary2, role2);
 
         Assertions.assertNull(newEmployee);
+
     }
 
 }
