@@ -7,10 +7,7 @@ class AdminMenuModel {
             "Add a new manager",
             "Add a new cashier",
             "View the inventory products/entries",
-            "Check the order list",
-            "The ordered items list",
-            "Receipt list",
-            "Transaction list",
+            "Generate report",
             "Open the group chat",
             "Sign out"
     );

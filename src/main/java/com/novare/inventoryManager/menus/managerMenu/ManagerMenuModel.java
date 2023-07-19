@@ -11,6 +11,7 @@ class ManagerMenuModel {
             "Update product threshold quantity",
             "Update product price",
             "View notifications",
+            "Export transaction list",
             "Open the group chat",
             "Sign out"
     );

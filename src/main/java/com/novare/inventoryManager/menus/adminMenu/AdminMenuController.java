@@ -4,6 +4,7 @@ import com.novare.inventoryManager.auth.Registrator;
 import com.novare.inventoryManager.auth.Validator;
 import com.novare.inventoryManager.employees.Employee;
 import com.novare.inventoryManager.employees.EmployeeRole;
+import com.novare.inventoryManager.inventory.Inventory;
 import com.novare.inventoryManager.utils.Menu;
 
 import java.math.BigDecimal;
@@ -41,14 +42,11 @@ class AdminMenuController {
                 case 1 -> addNewEmployee(EmployeeRole.MANAGER);
                 case 2 -> addNewEmployee(EmployeeRole.CASHIER);
 
-                case 3 -> System.out.println("TODO: View the inventory products/entries");
-                case 4 -> System.out.println("TODO: Check the order list");
-                case 5 -> System.out.println("TODO: The ordered items list");
-                case 6 -> System.out.println("TODO: Receipt list");
-                case 7 -> System.out.println("TODO: Transaction list");
-                case 8 -> System.out.println("TODO: Open the group chat");
+                case 3 -> Inventory.listInventory();
+                case 4 -> System.out.println("TODO: Generate report"); //sprint 2
+                case 5 -> System.out.println("TODO: Open the group chat"); // sprint 2
 
-                case 9 -> Menu.redirectToHomeMenu();
+                case 6 -> Menu.redirectToHomeMenu();
                 default -> Menu.printInvalidOption();
             }
         }
@@ -66,6 +64,7 @@ class AdminMenuController {
         Menu.displayMenu(model.menuOptions);
         requestUserInput();
     }
+
     boolean addNewEmployee(EmployeeRole role) throws NoSuchAlgorithmException {
         Registrator registrator = new Registrator();
         Employee newEmployee;

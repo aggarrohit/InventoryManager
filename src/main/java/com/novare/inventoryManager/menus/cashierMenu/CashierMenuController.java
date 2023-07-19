@@ -1,7 +1,12 @@
 package com.novare.inventoryManager.menus.cashierMenu;
 
+import com.novare.inventoryManager.inventory.Inventory;
+import com.novare.inventoryManager.saleOrder.SalesOrderController;
+import com.novare.inventoryManager.saleOrder.SalesOrderModel;
+import com.novare.inventoryManager.saleOrder.SalesOrderView;
 import com.novare.inventoryManager.utils.Menu;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 class CashierMenuController {
@@ -34,18 +39,24 @@ class CashierMenuController {
         try {
             switch (selectedOption) {
 
-                case 1 -> System.out.println("TODO: View the inventory products");
-                case 2 -> System.out.println("TODO: Add orders to the orders list");
-                case 3 -> System.out.println("TODO: Sell an item");
-                case 4 -> System.out.println("TODO: Open the group chat");
+                case 1 -> Inventory.listInventory();
+                case 2 -> new SalesOrderController(new SalesOrderModel(),new SalesOrderView()).createSalesOrder();
+                case 3 -> System.out.println("TODO: Open the group chat"); // sprint 2
 
-                case 5 -> Menu.redirectToHomeMenu();
+                case 4 -> Menu.redirectToHomeMenu();
                 default -> Menu.printInvalidOption();
             }
+            runMenu();
         }
         catch(IndexOutOfBoundsException exception) {
             Menu.printInvalidOption();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
+    void runMenu(){
+        Menu.displayMenu(model.menuOptions);
+        requestUserInput();
+    }
 }

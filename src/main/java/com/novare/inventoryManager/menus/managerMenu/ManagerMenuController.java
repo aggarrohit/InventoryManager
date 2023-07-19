@@ -1,7 +1,15 @@
 package com.novare.inventoryManager.menus.managerMenu;
 
+
+import com.novare.inventoryManager.inventory.Inventory;
+import com.novare.inventoryManager.notification.NotificationsImpl;
+import com.novare.inventoryManager.product.AddProduct;
+import com.novare.inventoryManager.purchaseOrder.PurchaseOrderController;
+import com.novare.inventoryManager.purchaseOrder.PurchaseOrderModel;
+import com.novare.inventoryManager.purchaseOrder.PurchaseOrderView;
 import com.novare.inventoryManager.utils.Menu;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 class ManagerMenuController {
@@ -25,22 +33,35 @@ class ManagerMenuController {
 
             Menu.printRequest();
             requestUserInput();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    void handleOption(int selectedOption) throws IndexOutOfBoundsException {
+    void handleOption(int selectedOption) throws IndexOutOfBoundsException, FileNotFoundException {
             switch (selectedOption) {
-                case 1 -> System.out.println("TODO: View the inventory products/entries");
-                case 2 -> System.out.println("TODO: Generate report");
-                case 3 -> System.out.println("TODO: Add new product");
-                case 4 -> System.out.println("TODO: Create a purchase order");
-                case 5 -> System.out.println("TODO: Update product threshold quantity");
-                case 6 -> System.out.println("TODO: Update product price");
-                case 7 -> System.out.println("TODO: View notifications");
-                case 8 -> System.out.println("TODO: Open the group chat");
+                case 1 -> Inventory.listInventory();
+                case 2 -> System.out.println("TODO: Generate report"); //sprint 2
+                case 3 -> new AddProduct();
+                case 4 -> new PurchaseOrderController(new PurchaseOrderModel(),new PurchaseOrderView()).createPurchaseOrder(); //refactor
+                case 5 -> System.out.println("TODO: Update product threshold quantity"); //sprint 2
+                case 6 -> System.out.println("TODO: Update product price"); //sprint 2
+                case 7 -> {
+                    NotificationsImpl notifications = new NotificationsImpl();
+                    notifications.printNotifications(notifications.getNotifications());
+                }
+                case 8 -> System.out.println("TODO: Export transaction list");
+                case 9 -> System.out.println("TODO: Open the group chat"); // sprint 2
 
-                case 9 -> Menu.redirectToHomeMenu();
+                case 10 -> Menu.redirectToHomeMenu();
                 default -> throw new IndexOutOfBoundsException();
             }
+            runMenu();
         }
+
+    void runMenu(){
+        Menu.displayMenu(model.menuOptions);
+        requestUserInput();
+    }
 }
+
