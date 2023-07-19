@@ -54,4 +54,10 @@ public class Storage {
         }
     }
 
+    public void deleteEmployee(UUID id) {
+        ArrayList<Employee> employees = getEmployees();
+        employees.removeIf(employee -> employee.getId().equals(id));
+        fileManager.writeObjects(EMPLOYEES_FILE, employees);
+    }
+
 }

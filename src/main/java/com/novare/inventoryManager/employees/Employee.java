@@ -57,4 +57,8 @@ public class Employee implements Serializable {
     public void setRole(EmployeeRole role) {
         this.role = role;
     }
+
+    public BigDecimal getSalary() {
+        return salary;
+    }
 }
