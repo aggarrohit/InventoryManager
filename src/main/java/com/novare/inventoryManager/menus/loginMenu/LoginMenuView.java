@@ -52,4 +52,7 @@ class LoginMenuView {
         ConsoleMessage.showInfoMessage("Password should contain at least 1 uppercase letter, 1 lowercase letter, 1 digit, and be at least 8 characters long.");
     }
 
+    public void printPasswordEqualWarning() {
+        ConsoleMessage.showErrorMessage("New password should not be the same as the default password. Please try again.");
+    }
 }

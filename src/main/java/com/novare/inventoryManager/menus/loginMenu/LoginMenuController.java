@@ -79,19 +79,24 @@ class LoginMenuController {
         while(true) {
             view.printChangePasswordRequest();
             String newPassword = getCustomerPassword(view.NEW_PASSWORD_REQUEST);
+            String defaultPassword = employee.getDefaultPassword();
+            String newHashedPassword = PasswordHasher.hashPassword(newPassword);
 
-            try {
-                if(Validator.validatePasswordFormat(newPassword)) {
-                    String hashedPassword = PasswordHasher.hashPassword(newPassword);
-                    employee.setPassword(hashedPassword);
-                    storage.updateEmployee(employee);
-                    view.printPasswordChangeSuccess();
-                    break;
-                }
-            } catch (IllegalArgumentException exception) {
-                Menu.printInvalidOption();
+            if(newHashedPassword.equals(defaultPassword)) {
+                view.printPasswordEqualWarning();
             }
-
+            else {
+                try {
+                    if (Validator.validatePasswordFormat(newPassword)) {
+                        employee.setPassword(newHashedPassword);
+                        storage.updateEmployee(employee);
+                        view.printPasswordChangeSuccess();
+                        break;
+                    }
+                } catch (IllegalArgumentException exception) {
+                    Menu.printInvalidOption();
+                }
+            }
         }
 
     }
