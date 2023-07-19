@@ -10,6 +10,7 @@ class ManagerMenuModel {
             "Create a purchase order",
             "Update product threshold quantity",
             "Update product price",
+            "View notifications",
             "Open the group chat",
             "Sign out"
     );
