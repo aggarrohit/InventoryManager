@@ -3,6 +3,7 @@ package com.novare.inventoryManager.order;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.novare.inventoryManager.inventory.InventoryFileHelper;
+import com.novare.inventoryManager.utils.ConsoleMessage;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -12,14 +13,11 @@ import java.util.*;
 public class PurchaseOrderInventory {
     private final String Purchase_Order_PATH = System.getProperty("user.dir") + "/data/PurchaseOrder.txt";
 
-
     private final List<PurchaseOrder> purchaseOrders = Collections.synchronizedList(loadPurchaseOrdersFromFileTxt());
-
 
     public List<PurchaseOrder> getPurchaseOrders() {
         return purchaseOrders;
     }
-
 
     public List<PurchaseOrder> getPurchaseOrderById(UUID requestedId) throws NoSuchElementException {
         List<PurchaseOrder> result = new ArrayList<>();
@@ -46,7 +44,6 @@ public class PurchaseOrderInventory {
         return purchaseOrders.size();
     }
 
-
     public List<PurchaseOrder> loadPurchaseOrdersFromFileTxt() {
         Scanner sc = null;
         try {
@@ -62,7 +59,7 @@ public class PurchaseOrderInventory {
             sc.close();
             return listOfPurchasesOrders;
         } catch (FileNotFoundException e) {
-            System.out.println("PurchaseOrder Inventory file not found.");
+            ConsoleMessage.showErrorMessage("PurchaseOrder Inventory file not found.");
         }
         return new ArrayList<>();
     }

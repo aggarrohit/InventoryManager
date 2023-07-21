@@ -1,5 +1,7 @@
 package com.novare.inventoryManager.product.addProduct;
 
+import com.novare.inventoryManager.utils.ConsoleMessage;
+
 public class AddProductView {
     public void printExceptionMessage(Exception exception){
         System.out.println(exception.getMessage());
@@ -22,10 +24,10 @@ public class AddProductView {
     }
 
     public void showInvalidInput() {
-        System.out.println("Invalid input!!");
+        ConsoleMessage.showErrorMessage("Invalid input!!");
     }
 
     public void showSuccessMessage() {
-        System.out.println("Product added successfully!!");
+        ConsoleMessage.showSuccessMessage("Product added successfully!!");
     }
 }

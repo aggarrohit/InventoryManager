@@ -5,6 +5,7 @@ import com.novare.inventoryManager.order.PurchaseOrder;
 import com.novare.inventoryManager.order.PurchaseOrderInventory;
 import com.novare.inventoryManager.order.SalesOrder;
 import com.novare.inventoryManager.order.SalesOrderInventory;
+import com.novare.inventoryManager.utils.ConsoleMessage;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -29,14 +30,12 @@ public class IntegrationImpl implements IntegrationInterface {
             FileWriter fileWriter = new FileWriter(Export_File_PATH);
             fileWriter.write(json);
             fileWriter.close();
-            System.out.println("Json File is created in the Export directory." +
-                    "\nYou will return to the previous menu");
-
+            ConsoleMessage.showSuccessMessage("Json File is created in the Export directory.");
+            System.out.println("You will return to the previous menu");
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override

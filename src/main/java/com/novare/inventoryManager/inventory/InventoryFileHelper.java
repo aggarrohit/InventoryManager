@@ -2,6 +2,7 @@ package com.novare.inventoryManager.inventory;
 
 import com.novare.inventoryManager.notification.NotificationsImpl;
 import com.novare.inventoryManager.product.Product;
+import com.novare.inventoryManager.utils.ConsoleMessage;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -13,8 +14,7 @@ public class InventoryFileHelper {
 
     private static final String PATH_TO_INVENTORY_FILE = PATH_TO_ASSETS + "/inventory.txt";
 
-    private InventoryFileHelper() {
-    }
+    private InventoryFileHelper() {}
 
 
     public static List<Product> getProducts() throws FileNotFoundException {
@@ -59,7 +59,7 @@ public class InventoryFileHelper {
             if(productsWithSameName!=0) return true;
 
         } catch (FileNotFoundException e) {
-            System.out.println("Inventory file not found.");
+            ConsoleMessage.showErrorMessage("Inventory file not found.");
         }
 
         return false;
@@ -178,7 +178,7 @@ public class InventoryFileHelper {
             return productsWithSameId.get(0);
 
         } catch (FileNotFoundException e) {
-            System.out.println("Inventory file not found.");
+            ConsoleMessage.showErrorMessage("Inventory file not found.");
         }
 
         return null;

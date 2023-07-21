@@ -1,6 +1,5 @@
 package com.novare.inventoryManager.menus.managerMenu;
 
-
 import com.novare.inventoryManager.employees.Employee;
 import com.novare.inventoryManager.utils.Menu;
 
