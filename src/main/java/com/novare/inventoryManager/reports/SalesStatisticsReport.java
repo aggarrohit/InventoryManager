@@ -76,7 +76,7 @@ public class SalesStatisticsReport {
             document.add(table);
             document.close();
 
-            ConsoleMessage.showSuccessMessage("PDF report generated successfully!");
+            ConsoleMessage.showSuccessMessage("PDF report generated successfully to the data/reports folder!");
         }
         catch(DocumentException e){
             e.printStackTrace();
