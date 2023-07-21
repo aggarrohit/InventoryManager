@@ -2,7 +2,6 @@ package com.novare.inventoryManager.purchaseOrder;
 
 import com.novare.inventoryManager.order.PurchaseOrder;
 import com.novare.inventoryManager.product.Product;
-import com.novare.inventoryManager.inventory.Measurement;
 
 
 import java.math.BigDecimal;
@@ -67,19 +66,18 @@ public class PurchaseOrderView {
     public void displayOrderInventory(List<PurchaseOrder> inventoryPurchaseOrder) {
         int orderGroup=0;
         String orderId="";
-        for (int i = 0; i < inventoryPurchaseOrder.size(); i++) {
-            PurchaseOrder purchaseOrder = inventoryPurchaseOrder.get(i);
-            if (!(orderId.equals(purchaseOrder.getOrderId().toString()))){
+        for (PurchaseOrder purchaseOrder : inventoryPurchaseOrder) {
+            if (!(orderId.equals(purchaseOrder.getOrderId().toString()))) {
                 orderGroup++;
-                System.out.println("Order  " +orderGroup+" :");
+                System.out.println("Order  " + orderGroup + " :");
             }
             System.out.println(purchaseOrder.getProduct().product_name() + " ( Quantity: "
-                    + purchaseOrder.getOrderQuantity() + " " +purchaseOrder.getProduct().measurement()
+                    + purchaseOrder.getOrderQuantity() + " " + purchaseOrder.getProduct().measurement()
                     + " , Date: " + purchaseOrder.getDate()
                     + " , From : " + purchaseOrder.getCompanyName()
                     + " , price: " + purchaseOrder.getPrice()
-                    +")");
-            orderId=purchaseOrder.getOrderId().toString();
+                    + ")");
+            orderId = purchaseOrder.getOrderId().toString();
         }
     }
 }

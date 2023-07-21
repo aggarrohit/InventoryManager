@@ -86,19 +86,18 @@ public class SalesOrderView {
     public void displayOrderInventory(List<SalesOrder> inventorySaleOrder) {
         int orderGroup=0;
         String orderId="";
-        for (int i = 0; i < inventorySaleOrder.size(); i++) {
-            SalesOrder salesOrder = inventorySaleOrder.get(i);
-            if (!(orderId.equals(salesOrder.getOrderId().toString()))){
+        for (SalesOrder salesOrder : inventorySaleOrder) {
+            if (!(orderId.equals(salesOrder.getOrderId().toString()))) {
                 orderGroup++;
-                System.out.println("Order  " +orderGroup+" :");
+                System.out.println("Order  " + orderGroup + " :");
             }
             System.out.println(salesOrder.getProduct().product_name() + " ( Quantity: "
-                    + salesOrder.getOrderQuantity() + " " +salesOrder.getProduct().measurement()
+                    + salesOrder.getOrderQuantity() + " " + salesOrder.getProduct().measurement()
                     + " , Date: " + salesOrder.getDate()
                     + " , To : " + salesOrder.getCustomerName()
                     + " , price: " + salesOrder.getPrice()
-                    +")");
-            orderId=salesOrder.getOrderId().toString();
+                    + ")");
+            orderId = salesOrder.getOrderId().toString();
         }
     }
 }

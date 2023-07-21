@@ -153,7 +153,7 @@ public class SalesOrderControllerTest {
                 
                 Sales order details
                 Enter the item number\s""")).thenReturn(1); // Select item number 1
-        when(mockView.getBigDecimalNumericUserInput("Enter the quantity")).thenReturn(BigDecimal.ZERO, BigDecimal.valueOf(5)); // Set invalid quantity
+        when(mockView.getBigDecimalNumericUserInput("Enter the quantity")).thenReturn(BigDecimal.valueOf(-1), BigDecimal.valueOf(5)); // Set invalid quantity
         when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N)")).thenReturn(false); // Add more items: No
 
         // Execute the test case

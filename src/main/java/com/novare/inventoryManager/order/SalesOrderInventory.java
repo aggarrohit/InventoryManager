@@ -1,6 +1,5 @@
 package com.novare.inventoryManager.order;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.novare.inventoryManager.inventory.InventoryFileHelper;
 import com.novare.inventoryManager.product.Product;
 
@@ -16,29 +15,11 @@ public class SalesOrderInventory {
         return salesOrders;
     }
 
-    public List<SalesOrder> getSaleOrderById(UUID requestedId) throws NoSuchElementException {
-        List<SalesOrder> result = new ArrayList<>();
-        for (SalesOrder saleList : salesOrders) {
-            if (saleList.getOrderId().equals(requestedId)) {
-                result.add(saleList);
-            }
-        }
-        return result;
-    }
-
-    public SalesOrder getSaleOrderByIndex(int index) {
-        return salesOrders.get(index);
-    }
-
     public synchronized void addSaleOrder(List<SalesOrder> saleOrder) {
         for (SalesOrder salesOrder1 : saleOrder) {
             salesOrders.add(salesOrder1);
         }
         saveSalesOrdersToFileTxt(saleOrder);
-    }
-
-    public int SaleOrderInventoryCount() {
-        return salesOrders.size();
     }
 
     public List<SalesOrder> loadSalesOrdersFromFileTxt() {

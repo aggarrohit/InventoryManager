@@ -81,8 +81,6 @@ public class PurchaseOrderController {
             wantsToAddMoreItems = view.getYesNoUserInput("Do you want to add more items? (Y/N)");
         }
         if (!purchaseOrder.isEmpty()) {
-            //Update Inventory Quantity
-            //  UpdateQuantity(order.getProduct().getId(), order.getOrderQuantity())
             model.addPurchaseOrderToOrderInventory(purchaseOrder);
             view.displayInputMessage("Purchase order submitted Successfully. You return to the previous menu");
         }
