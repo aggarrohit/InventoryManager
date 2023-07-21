@@ -1,6 +1,6 @@
 package com.novare.inventoryManager.purchaseOrder;
 
-import com.novare.inventoryManager.data.order.PurchaseOrder;
+import com.novare.inventoryManager.order.PurchaseOrder;
 import com.novare.inventoryManager.product.Product;
 
 
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 
 public class PurchaseOrderController {
@@ -27,41 +28,73 @@ public class PurchaseOrderController {
         view.displayInventory(inventory);
         boolean wantsToAddMoreItems = true;
         LocalDate date = LocalDate.now();
+        UUID orderId=UUID.randomUUID();
         while (wantsToAddMoreItems) {
-            int itemNumber = view.getIntNumericUserInput("""
-                    Purchase order details
-                    Enter the item number:\s""");
-            if (itemNumber <= 0 || itemNumber > inventory.size()) {
-                view.displayErrorMessage("Enter a valid number between 1 and " + inventory.size());
-                continue;
+            inventory = model.getInventoryProducts();
+            int itemNumber;
+            Product selectedProduct;
+            BigDecimal quantity;
+            String companyName;
+            BigDecimal price;
+            // Get valid item number
+            while (true) {
+                itemNumber = view.getIntNumericUserInput("""
+                
+                Purchase order details
+                Enter the item number\s""");
+                if (itemNumber <= 0 || itemNumber > inventory.size()) {
+                    view.displayErrorMessage("Enter a valid number between 1 and " + inventory.size());
+                } else {
+                    selectedProduct = inventory.get(itemNumber - 1);
+                    break;
+                }
             }
-            Product selectedProduct = inventory.get(itemNumber - 1);
-            BigDecimal quantity = view.getBigDecimalNumericUserInput("Enter the quantity");
-            if (quantity == null || quantity.doubleValue() <= 0) {
-                view.displayErrorMessage("Enter a valid quantity.");
-                continue;
+            // Get valid quantity
+            while (true) {
+                quantity = view.getBigDecimalNumericUserInput("Enter the quantity");
+                if (quantity == null || quantity.doubleValue() <= 0) {
+                    view.displayErrorMessage("Enter a valid quantity.");
+                } else {
+                    break;
+                }
             }
-            String companyName = view.getInput("Enter the Company name: ");
-            BigDecimal price = view.getBigDecimalNumericUserInput("\n The sales price is , "
-                    +selectedProduct.price() +"\n Enter the purchase price:");
-            if (price.doubleValue() <= 0) {
-                view.displayErrorMessage("Enter a valid price.");
-                continue;
+            // Get valid company name
+            while (true) {
+                companyName = view.getInput("Enter the Company name");
+                if (companyName.isEmpty()) {
+                    view.displayErrorMessage("Enter a valid company name.");
+                } else {
+                    break;
+                }
             }
-            purchaseOrder.add(new PurchaseOrder(selectedProduct, quantity, date.toString(), companyName, price));
-            wantsToAddMoreItems = view.getYesNoUserInput("Do you want to add more items? (Y/N): ");
+            // Get valid price
+            while (true) {
+                price = view.getBigDecimalNumericUserInput("Enter the purchase price");
+                if (price == null || price.doubleValue() <= 0) {
+                    view.displayErrorMessage("Enter a valid price.");
+                } else {
+                    break;
+                }
+            }
+
+            purchaseOrder.add(new PurchaseOrder(orderId,selectedProduct, quantity, date.toString(), companyName, price));
+            model.updateProductQuantityById(selectedProduct.id(), selectedProduct.quantity().add(quantity));
+            wantsToAddMoreItems = view.getYesNoUserInput("Do you want to add more items? (Y/N)");
         }
         if (!purchaseOrder.isEmpty()) {
-
             //Update Inventory Quantity
             //  UpdateQuantity(order.getProduct().getId(), order.getOrderQuantity())
-            for (PurchaseOrder order :
-                    purchaseOrder) {
-                    model.updateProductQuantityById(order.getProduct().id(),
-                            order.getProduct().quantity().add(order.getOrderQuantity()));
-            }
             model.addPurchaseOrderToOrderInventory(purchaseOrder);
+            view.displayInputMessage("Purchase order submitted Successfully. You return to the previous menu");
         }
-        view.displayInventory(inventory);
+    }
+    public void printPurchaseOrdersInInventory() {
+        List<PurchaseOrder> purchaseOrders = model.getPurchaseOrderList();
+        if (purchaseOrders.isEmpty()) {
+            view.displayInputMessage("\nPurchase order inventory is empty.");
+        } else {
+            view.displayInputMessage("\nPurchase orders in the inventory:");
+                view.displayOrderInventory(purchaseOrders);
+        }
     }
 }

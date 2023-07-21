@@ -1,12 +1,11 @@
 package com.novare.inventoryManager.menus.managerMenu;
 
 
+import com.novare.inventoryManager.integration.IntegrationImpl;
 import com.novare.inventoryManager.inventory.Inventory;
 import com.novare.inventoryManager.notification.NotificationsImpl;
 import com.novare.inventoryManager.product.AddProduct;
-import com.novare.inventoryManager.purchaseOrder.PurchaseOrderController;
-import com.novare.inventoryManager.purchaseOrder.PurchaseOrderModel;
-import com.novare.inventoryManager.purchaseOrder.PurchaseOrderView;
+import com.novare.inventoryManager.purchaseOrder.PurchaseOrderMain;
 import com.novare.inventoryManager.utils.Menu;
 
 import java.io.FileNotFoundException;
@@ -43,14 +42,14 @@ class ManagerMenuController {
                 case 1 -> Inventory.listInventory();
                 case 2 -> System.out.println("TODO: Generate report"); //sprint 2
                 case 3 -> new AddProduct();
-                case 4 -> new PurchaseOrderController(new PurchaseOrderModel(),new PurchaseOrderView()).createPurchaseOrder(); //refactor
+                case 4 -> new PurchaseOrderMain("showPurchaseOrders"); //refactor
                 case 5 -> System.out.println("TODO: Update product threshold quantity"); //sprint 2
                 case 6 -> System.out.println("TODO: Update product price"); //sprint 2
                 case 7 -> {
                     NotificationsImpl notifications = new NotificationsImpl();
                     notifications.printNotifications(notifications.getNotifications());
                 }
-                case 8 -> System.out.println("TODO: Export transaction list");
+                case 8 -> new IntegrationImpl().createIntegrateFile();
                 case 9 -> System.out.println("TODO: Open the group chat"); // sprint 2
 
                 case 10 -> Menu.redirectToHomeMenu();

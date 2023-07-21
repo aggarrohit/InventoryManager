@@ -1,6 +1,6 @@
 package com.novare.inventoryManager.purchaseOrder;
 
-import com.novare.inventoryManager.data.order.PurchaseOrder;
+import com.novare.inventoryManager.order.PurchaseOrder;
 import com.novare.inventoryManager.product.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,7 +38,7 @@ public class PurchaseOrderControllerTest {
         controller = new PurchaseOrderController(mockModel, mockView);
     }
 
-    @SuppressWarnings("unchecked")
+
     @Test
     public void testCreatePurchaseOrder_AddSingleItem() throws FileNotFoundException {
         // Set up test data
@@ -48,13 +48,13 @@ public class PurchaseOrderControllerTest {
 
         // Set up user inputs
         when(mockView.getIntNumericUserInput("""
+                
                 Purchase order details
-                Enter the item number:\s""")).thenReturn(1); // Select item number 1
+                Enter the item number\s""")).thenReturn(1); // Select item number 1
         when(mockView.getBigDecimalNumericUserInput("Enter the quantity")).thenReturn(BigDecimal.valueOf(5)); // Set quantity as 5
-        when(mockView.getInput("Enter the Company name: ")).thenReturn("Company XYZ"); // Set company name
-        when(mockView.getBigDecimalNumericUserInput("\n The sales price is , " +
-                product.price() + "\n Enter the purchase price:")).thenReturn(BigDecimal.valueOf(8)); // Set price as 8
-        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N): ")).thenReturn(false); // Add more items: No
+        when(mockView.getInput("Enter the Company name")).thenReturn("Company XYZ"); // Set company name
+        when(mockView.getBigDecimalNumericUserInput("Enter the purchase price")).thenReturn(BigDecimal.valueOf(8)); // Set price as 8
+        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N)")).thenReturn(false); // Add more items: No
 
         // Execute the test case
         controller.createPurchaseOrder();
@@ -62,7 +62,7 @@ public class PurchaseOrderControllerTest {
         // Verify the results
         verify(mockModel).addPurchaseOrderToOrderInventory(Mockito.anyList());
         verify(mockModel).updateProductQuantityById(Mockito.any(UUID.class), Mockito.any(BigDecimal.class));
-        verify(mockView, times(2)).displayInventory(inventory);
+        verify(mockView, times(1)).displayInventory(inventory);
 
         // Assertion
         ArgumentCaptor<List<PurchaseOrder>> captor = ArgumentCaptor.forClass(List.class);
@@ -88,15 +88,13 @@ public class PurchaseOrderControllerTest {
 
         // Set up user inputs
         when(mockView.getIntNumericUserInput("""
+                
                 Purchase order details
-                Enter the item number:\s""")).thenReturn(1, 2); // Select item numbers 1 and 2
+                Enter the item number\s""")).thenReturn(1, 2); // Select item numbers 1 and 2
         when(mockView.getBigDecimalNumericUserInput("Enter the quantity")).thenReturn(BigDecimal.valueOf(5), BigDecimal.valueOf(3)); // Set quantities
-        when(mockView.getInput("Enter the Company name: ")).thenReturn("Company XYZ"); // Set company name
-        when(mockView.getBigDecimalNumericUserInput("\n The sales price is , " +
-                product1.price() + "\n Enter the purchase price:")).thenReturn(BigDecimal.valueOf(8)); // Set price for item 1
-        when(mockView.getBigDecimalNumericUserInput("\n The sales price is , " +
-                product2.price() + "\n Enter the purchase price:")).thenReturn(BigDecimal.valueOf(10)); // Set price for item 2
-        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N): ")).thenReturn(true, false); // Add more items: Yes, No
+        when(mockView.getInput("Enter the Company name")).thenReturn("Company XYZ"); // Set company name
+        when(mockView.getBigDecimalNumericUserInput("Enter the purchase price")).thenReturn(BigDecimal.valueOf(8),BigDecimal.valueOf(10)); // Set price for item 1
+        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N)")).thenReturn(true, false); // Add more items: Yes, No
 
         // Execute the test case
         controller.createPurchaseOrder();
@@ -104,7 +102,7 @@ public class PurchaseOrderControllerTest {
         // Verify the results
         verify(mockModel).addPurchaseOrderToOrderInventory(Mockito.anyList());
         verify(mockModel, times(2)).updateProductQuantityById(Mockito.any(UUID.class), Mockito.any(BigDecimal.class));
-        verify(mockView, times(2)).displayInventory(inventory);
+        verify(mockView, times(1)).displayInventory(inventory);
 
         // Assertion
         ArgumentCaptor<List<PurchaseOrder>> captor = ArgumentCaptor.forClass(List.class);
@@ -129,13 +127,13 @@ public class PurchaseOrderControllerTest {
 
         // Set up user inputs
         when(mockView.getIntNumericUserInput("""
+                
                 Purchase order details
-                Enter the item number:\s""")).thenReturn(0,2,1); // Select invalid item number
+                Enter the item number\s""")).thenReturn(0,2,1); // Select invalid item number
         when(mockView.getBigDecimalNumericUserInput("Enter the quantity")).thenReturn(BigDecimal.valueOf(5)); // Set quantity as 5
-        when(mockView.getInput("Enter the Company name: ")).thenReturn("Company XYZ"); // Set company name
-        when(mockView.getBigDecimalNumericUserInput("\n The sales price is , " +
-                product.price() + "\n Enter the purchase price:")).thenReturn(BigDecimal.valueOf(8)); // Set price as 8
-        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N): ")).thenReturn(false); // Add more items: No
+        when(mockView.getInput("Enter the Company name")).thenReturn("Company XYZ"); // Set company name
+        when(mockView.getBigDecimalNumericUserInput("Enter the purchase price")).thenReturn(BigDecimal.valueOf(8)); // Set price as 8
+        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N)")).thenReturn(false); // Add more items: No
 
         // Execute the test case
         controller.createPurchaseOrder();
@@ -154,13 +152,13 @@ public class PurchaseOrderControllerTest {
 
         // Set up user inputs
         when(mockView.getIntNumericUserInput("""
+                
                 Purchase order details
-                Enter the item number:\s""")).thenReturn(1); // Select item number 1
+                Enter the item number\s""")).thenReturn(1); // Select item number 1
         when(mockView.getBigDecimalNumericUserInput("Enter the quantity")).thenReturn(BigDecimal.ZERO,BigDecimal.valueOf(5)); // Set invalid quantity
-        when(mockView.getInput("Enter the Company name: ")).thenReturn("Company XYZ"); // Set company name
-        when(mockView.getBigDecimalNumericUserInput("\n The sales price is , " +
-                product.price() + "\n Enter the purchase price:")).thenReturn(BigDecimal.valueOf(8)); // Set price as 8
-        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N): ")).thenReturn(false); // Add more items: No
+        when(mockView.getInput("Enter the Company name")).thenReturn("Company XYZ"); // Set company name
+        when(mockView.getBigDecimalNumericUserInput("Enter the purchase price")).thenReturn(BigDecimal.valueOf(8)); // Set price as 8
+        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N)")).thenReturn(false); // Add more items: No
 
         // Execute the test case
         controller.createPurchaseOrder();
@@ -178,13 +176,13 @@ public class PurchaseOrderControllerTest {
 
         // Set up user inputs
         when(mockView.getIntNumericUserInput("""
+                
                 Purchase order details
-                Enter the item number:\s""")).thenReturn(1); // Select item number 1
+                Enter the item number\s""")).thenReturn(1); // Select item number 1
         when(mockView.getBigDecimalNumericUserInput("Enter the quantity")).thenReturn(BigDecimal.ONE); // Set valid quantity
-        when(mockView.getInput("Enter the Company name: ")).thenReturn("Company XYZ"); // Set company name
-        when(mockView.getBigDecimalNumericUserInput("\n The sales price is , " +
-                product.price() + "\n Enter the purchase price:")).thenReturn(BigDecimal.ZERO,BigDecimal.valueOf(8)); // Set invalid price
-        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N): ")).thenReturn(false); // Add more items: No
+        when(mockView.getInput("Enter the Company name")).thenReturn("Company XYZ"); // Set company name
+        when(mockView.getBigDecimalNumericUserInput("Enter the purchase price")).thenReturn(BigDecimal.ZERO,BigDecimal.valueOf(8)); // Set invalid price
+        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N)")).thenReturn(false); // Add more items: No
 
         // Execute the test case
         controller.createPurchaseOrder();
@@ -201,13 +199,13 @@ public class PurchaseOrderControllerTest {
 
         // Set up user inputs
         when(mockView.getIntNumericUserInput("""
+                
                 Purchase order details
-                Enter the item number:\s""")).thenReturn(1); // Select item number 1
+                Enter the item number\s""")).thenReturn(1); // Select item number 1
         when(mockView.getBigDecimalNumericUserInput("Enter the quantity")).thenReturn(BigDecimal.valueOf(5)); // Set quantity as 5
-        when(mockView.getInput("Enter the Company name: ")).thenReturn("Company XYZ"); // Set company name
-        when(mockView.getBigDecimalNumericUserInput("\n The sales price is , " +
-                product.price() + "\n Enter the purchase price:")).thenReturn(BigDecimal.valueOf(8)); // Set price as 8
-        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N): ")).thenReturn(false); // Add more items: No
+        when(mockView.getInput("Enter the Company name")).thenReturn("Company XYZ"); // Set company name
+        when(mockView.getBigDecimalNumericUserInput("Enter the purchase price")).thenReturn(BigDecimal.valueOf(8)); // Set price as 8
+        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N)")).thenReturn(false); // Add more items: No
 
         // Number of threads to execute concurrently
         int numThreads = 10;

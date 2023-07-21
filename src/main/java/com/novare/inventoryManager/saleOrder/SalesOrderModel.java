@@ -1,8 +1,9 @@
 package com.novare.inventoryManager.saleOrder;
 
 import com.novare.inventoryManager.inventory.InventoryFileHelper;
+import com.novare.inventoryManager.order.SalesOrder;
+import com.novare.inventoryManager.order.SalesOrderInventory;
 import com.novare.inventoryManager.product.Product;
-import com.novare.inventoryManager.data.order.*;
 
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
@@ -12,9 +13,9 @@ public class SalesOrderModel {
     private final SalesOrderInventory salesOrderInventory = new SalesOrderInventory();
 
     public synchronized void addSalesOrderToOrderInventory(List<SalesOrder> salesOrder) {
-        salesOrderInventory.addSaleOrder(new SalesOrders(salesOrder));
+        salesOrderInventory.addSaleOrder(salesOrder);
     }
-    public List<SalesOrders> getSalesOrderList(){
+    public List<SalesOrder> getSalesOrderList(){
         return salesOrderInventory.getSaleOrders();
     }
     public List<Product> getInventoryProducts() throws FileNotFoundException {
