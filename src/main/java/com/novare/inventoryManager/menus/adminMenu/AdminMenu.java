@@ -6,7 +6,7 @@ public class AdminMenu {
     public AdminMenu(Employee employee) {
         AdminMenuModel model = new AdminMenuModel();
         AdminMenuView view = new AdminMenuView(employee, model.menuOptions);
-        AdminMenuController controller = new AdminMenuController(model, view);
+        AdminMenuController controller = new AdminMenuController(model, view,employee);
 
         controller.requestUserInput();
     }

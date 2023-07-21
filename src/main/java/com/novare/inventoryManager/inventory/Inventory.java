@@ -1,9 +1,7 @@
 package com.novare.inventoryManager.inventory;
 
-import com.novare.inventoryManager.notification.Notification;
 import com.novare.inventoryManager.product.Product;
 import com.novare.inventoryManager.utils.Table;
-import com.novare.inventoryManager.utils.Utilities;
 
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
