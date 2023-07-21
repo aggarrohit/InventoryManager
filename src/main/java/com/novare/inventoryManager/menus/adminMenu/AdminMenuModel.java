@@ -6,6 +6,7 @@ class AdminMenuModel {
     List<String> menuOptions = List.of(
             "Add a new manager",
             "Add a new cashier",
+            "View employees",
             "View the inventory products/entries",
             "Generate report",
             "Open the group chat",
