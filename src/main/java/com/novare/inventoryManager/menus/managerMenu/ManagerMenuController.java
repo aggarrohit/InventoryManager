@@ -53,24 +53,22 @@ class ManagerMenuController {
     void handleOption(int selectedOption) throws IndexOutOfBoundsException, FileNotFoundException {
         switch (selectedOption) {
             case 1 -> Inventory.listInventory();
-            case 2 -> {
-                SalesOrderInventory salesOrderInventory = new SalesOrderInventory();
-                List<SalesStatistics> statisticsData = salesOrderInventory.getMostSoldItemsStatistics();
-                SalesStatisticsReport.generate(statisticsData);
-            }
-            case 3 -> new AddProduct();
-            case 4 -> new PurchaseOrderMain("createPurchaseOrder");
-            case 5 -> new UpdateProduct(PRODUCT_THRESHOLD_QUANTITY);
-            case 6 -> new UpdateProduct(PRODUCT_PRICE);
-            case 7 -> {
+            case 2 -> new SalesOrderMain("showSalesOrders");
+            case 3 -> new PurchaseOrderMain("showPurchaseOrders");
+            case 4 -> new AddProduct();
+            case 5 -> new PurchaseOrderMain("createPurchaseOrder");
+            case 6 -> new UpdateProduct(PRODUCT_THRESHOLD_QUANTITY);
+            case 7 -> new UpdateProduct(PRODUCT_PRICE);
+            case 8 -> {
                 NotificationsImpl notifications = new NotificationsImpl();
                 notifications.printNotifications(notifications.getNotifications());
             }
-            case 8 -> new IntegrationImpl().createIntegrateFile();
-            case 9 -> new GroupChat(employee);
-            case 10 -> new SalesOrderMain("showSalesOrders");
-            case 11 -> new PurchaseOrderMain("showPurchaseOrders");
-
+            case 9 -> {
+                SalesOrderInventory salesOrderInventory = new SalesOrderInventory();
+                SalesStatisticsReport.generate(salesOrderInventory.getMostSoldItemsStatistics());
+            }
+            case 10 -> new IntegrationImpl().createIntegrateFile();
+            case 11 -> new GroupChat(employee);
             case 12 -> Menu.redirectToHomeMenu();
             default -> throw new IndexOutOfBoundsException();
         }

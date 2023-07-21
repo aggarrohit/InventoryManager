@@ -21,6 +21,10 @@ public class SalesStatisticsReport {
     private SalesStatisticsReport() {}
 
     public static void generate(List<SalesStatistics> salesStatistics) {
+        if (salesStatistics == null) {
+            ConsoleMessage.showErrorMessage("Sales statistics list is null. PDF report cannot be generated.");
+            return;
+        }
         String filePath = "data/reports/report.pdf";
         Document document = new Document(PageSize.A4);
         List<String> columns = List.of("N", "Item name", "Quantity Sold", "Measurement", "Average Price", "Threshold Quantity");
@@ -72,7 +76,7 @@ public class SalesStatisticsReport {
             document.add(table);
             document.close();
 
-            ConsoleMessage.showSuccessMessage("PDF report generated successfully!");
+            ConsoleMessage.showSuccessMessage("PDF report generated successfully to the data/reports folder!");
         }
         catch(DocumentException e){
             e.printStackTrace();

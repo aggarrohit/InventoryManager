@@ -137,7 +137,7 @@ public class SalesOrderInventory {
             return result;
             }
 
-        catch(ArithmeticException exception) {
+        catch(ArithmeticException | NullPointerException exception) {
             System.out.println(exception.getMessage());
             return null;
         }
