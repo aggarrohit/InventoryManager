@@ -1,6 +1,5 @@
 package com.novare.inventoryManager.saleOrder;
 
-import com.novare.inventoryManager.order.PurchaseOrder;
 import com.novare.inventoryManager.product.Product;
 import com.novare.inventoryManager.order.SalesOrder;
 
@@ -57,7 +56,7 @@ public class SalesOrderController {
             // Get valid quantity
             while (true) {
                 quantity = view.getBigDecimalNumericUserInput("Enter the quantity");
-                if (quantity == null || quantity.doubleValue() <= 0) {
+                if (quantity == null || quantity.doubleValue() < 0) {
                     view.displayErrorMessage("Enter a valid quantity.");
                 } else if (quantity.doubleValue() > availableQuantity.doubleValue()) {
                     view.displayErrorMessage("Insufficient quantity. Available: " + availableQuantity);
@@ -79,8 +78,6 @@ public class SalesOrderController {
             wantsToAddMoreItems = view.getYesNoUserInput("Do you want to add more items? (Y/N)");
         }
         if (!salesOrder.isEmpty()) {
-            //Update Inventory Quantity
-            //  UpdateQuantity(order.getProduct().getId(), order.getOrderQuantity())
             model.addSalesOrderToOrderInventory(salesOrder);
             view.displaySalesOrder(salesOrder);
             view.displayInputMessage("Sales order submitted Successfully. You return to the previous menu");
