@@ -6,6 +6,7 @@ import com.novare.inventoryManager.employees.Employee;
 import com.novare.inventoryManager.employees.EmployeeRole;
 import com.novare.inventoryManager.inventory.Inventory;
 import com.novare.inventoryManager.utils.Menu;
+import com.novare.inventoryManager.utils.Storage;
 
 import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
@@ -41,12 +42,16 @@ class AdminMenuController {
             switch (selectedOption) {
                 case 1 -> addNewEmployee(EmployeeRole.MANAGER);
                 case 2 -> addNewEmployee(EmployeeRole.CASHIER);
+                case 3 -> {
+                    Storage storage = new Storage();
+                    view.printEmployeesTable(storage.getEmployees());
+                }
 
-                case 3 -> Inventory.listInventory();
-                case 4 -> System.out.println("TODO: Generate report"); //sprint 2
-                case 5 -> System.out.println("TODO: Open the group chat"); // sprint 2
+                case 4 -> Inventory.listInventory();
+                case 5 -> System.out.println("TODO: Generate report"); //sprint 2
+                case 6 -> System.out.println("TODO: Open the group chat"); // sprint 2
 
-                case 6 -> Menu.redirectToHomeMenu();
+                case 7 -> Menu.redirectToHomeMenu();
                 default -> Menu.printInvalidOption();
             }
         }
@@ -58,7 +63,6 @@ class AdminMenuController {
         }
         runMenu();
     }
-
 
     void runMenu(){
         Menu.displayMenu(model.menuOptions);
@@ -103,6 +107,5 @@ class AdminMenuController {
             }
         }
     }
-
 
 }
