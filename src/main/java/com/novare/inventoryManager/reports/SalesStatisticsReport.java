@@ -20,7 +20,7 @@ public class SalesStatisticsReport {
     public static void generate(List<SalesStatistics> salesStatistics) {
         String filePath = "data/reports/report.pdf";
         Document document = new Document(PageSize.A4);
-        List<String> columns = List.of("N", "Item name", "Quantity Sold", "Average Price", "Threshold Quantity");
+        List<String> columns = List.of("N", "Item name", "Quantity Sold", "Measurement", "Average Price", "Threshold Quantity");
 
         try{
             Path path = Paths.get(filePath);
@@ -45,7 +45,7 @@ public class SalesStatisticsReport {
             // Table
             PdfPTable table = new PdfPTable(columns.size());
             table.setWidthPercentage(100);
-            table.setWidths(new int[]{1, 4, 3, 3, 3});
+            table.setWidths(new int[]{1, 4, 3, 3, 3, 3});
 
             for(String columnName : columns) {
                 Font boldFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12);
@@ -60,6 +60,7 @@ public class SalesStatisticsReport {
                 table.addCell(Integer.toString(i+1));
                 table.addCell(productStatistics.product().product_name());
                 table.addCell(String.valueOf(productStatistics.totalQuantitySold()));
+                table.addCell(productStatistics.product().measurement().getMeasurement());
                 table.addCell(String.valueOf(productStatistics.averagePrice()));
                 table.addCell(String.valueOf(productStatistics.product().threshold_qty()));
 
