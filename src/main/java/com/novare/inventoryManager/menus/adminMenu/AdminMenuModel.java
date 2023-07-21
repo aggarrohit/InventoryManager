@@ -3,7 +3,7 @@ package com.novare.inventoryManager.menus.adminMenu;
 import java.util.List;
 
 class AdminMenuModel {
-    List<String> menuOptions = List.of(
+    final List<String> menuOptions = List.of(
             "Add a new manager",
             "Add a new cashier",
             "View employees",

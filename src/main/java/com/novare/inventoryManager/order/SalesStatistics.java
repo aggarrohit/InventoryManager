@@ -1,4 +1,4 @@
-package com.novare.inventoryManager.data.order;
+package com.novare.inventoryManager.order;
 
 import com.novare.inventoryManager.product.Product;
 

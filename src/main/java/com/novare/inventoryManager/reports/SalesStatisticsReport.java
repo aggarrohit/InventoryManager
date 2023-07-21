@@ -1,6 +1,6 @@
 package com.novare.inventoryManager.reports;
 
-import com.novare.inventoryManager.data.order.SalesStatistics;
+import com.novare.inventoryManager.order.SalesStatistics;
 import com.novare.inventoryManager.utils.ConsoleMessage;
 
 import com.itextpdf.text.*;

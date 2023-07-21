@@ -1,5 +1,6 @@
 package com.novare.inventoryManager.purchaseOrder;
 
+import com.novare.inventoryManager.order.PurchaseOrder;
 import com.novare.inventoryManager.product.Product;
 import com.novare.inventoryManager.inventory.Measurement;
 
@@ -19,12 +20,15 @@ public class PurchaseOrderView {
         System.out.println("Inventory:");
         for (int i = 0; i < inventoryProducts.size(); i++) {
             Product product = inventoryProducts.get(i);
-            System.out.println(i + 1 + ". " + product.product_name() + " (Quantity: " + product.quantity()
-                    +" "+product.measurement()+" )");
+            System.out.println(i + 1 + ". " + product.product_name() + " (Quantity: " + product.quantity() +
+                    " , Sales price: " + product.price() +")");
         }
     }
     public boolean getYesNoUserInput(String prompt) {
-        String choice = getInput(prompt);
+        String choice;
+        do {
+            choice = getInput(prompt);
+        } while (!choice.equalsIgnoreCase("Y") && !choice.equalsIgnoreCase("N"));
         return choice.equalsIgnoreCase("Y");
     }
     public String getInput(String prompt) {
@@ -33,7 +37,7 @@ public class PurchaseOrderView {
     }
 
     public int getIntNumericUserInput(String prompt) {
-        System.out.print(prompt);
+        System.out.print(prompt+" :");
         try {
             return Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
@@ -41,28 +45,8 @@ public class PurchaseOrderView {
         }
     return 0;
     }
-
-    public Measurement getMeasureTypeInput() {
-        int choice = getIntNumericUserInput("Enter measure type id between 1 and 3 (1=Quantity, 2=Liters, 3=Kilogram): ");
-        switch (choice) {
-            case 1 -> {
-                return Measurement.PIECES;
-            }
-            case 2 -> {
-                return Measurement.LITRES;
-            }
-            case 3 -> {
-                return Measurement.KILOGRAMS;
-            }
-            default -> {
-                displayInvalidInputMessage();
-                return getMeasureTypeInput();
-            }
-        }
-    }
-
     public BigDecimal getBigDecimalNumericUserInput(String prompt) {
-        System.out.print(prompt+": ");
+        System.out.print(prompt+" :");
         try {
             return BigDecimal.valueOf(Double.parseDouble(scanner.nextLine()));
         } catch (NumberFormatException e) {
@@ -71,9 +55,31 @@ public class PurchaseOrderView {
         return null;
     }
     public void displayInvalidInputMessage() {
-        System.out.println("⚠️ Invalid input. Please try again.\n");
+        System.out.println("⚠️ Invalid input. Please try again.");
+    }
+    public void displayInputMessage(String prompt) {
+        System.out.println(prompt);
     }
     public void displayErrorMessage(String errorMessage) {
         System.out.println("⚠️"+errorMessage);
+    }
+
+    public void displayOrderInventory(List<PurchaseOrder> inventoryPurchaseOrder) {
+        int orderGroup=0;
+        String orderId="";
+        for (int i = 0; i < inventoryPurchaseOrder.size(); i++) {
+            PurchaseOrder purchaseOrder = inventoryPurchaseOrder.get(i);
+            if (!(orderId.equals(purchaseOrder.getOrderId().toString()))){
+                orderGroup++;
+                System.out.println("Order  " +orderGroup+" :");
+            }
+            System.out.println(purchaseOrder.getProduct().product_name() + " ( Quantity: "
+                    + purchaseOrder.getOrderQuantity() + " " +purchaseOrder.getProduct().measurement()
+                    + " , Date: " + purchaseOrder.getDate()
+                    + " , From : " + purchaseOrder.getCompanyName()
+                    + " , price: " + purchaseOrder.getPrice()
+                    +")");
+            orderId=purchaseOrder.getOrderId().toString();
+        }
     }
 }

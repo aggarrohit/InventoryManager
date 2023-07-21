@@ -1,19 +1,16 @@
-package com.novare.inventoryManager.product;
+package com.novare.inventoryManager.product.addProduct;
 
-import com.novare.inventoryManager.inventory.Inventory;
 import com.novare.inventoryManager.inventory.Measurement;
+import com.novare.inventoryManager.product.Product;
+import com.novare.inventoryManager.product.ProductHelper;
 
 import java.math.BigDecimal;
-import java.util.Scanner;
 import java.util.UUID;
 
 public class AddProductController {
 
-    AddProductView addProductView;
-    AddProductModel addProductModel;
-
-    Scanner scanner;
-
+    final AddProductView addProductView;
+    final AddProductModel addProductModel;
     private String productName;
     private Measurement measurement;
     private BigDecimal thresholdQuantity,price;
@@ -21,8 +18,6 @@ public class AddProductController {
     public AddProductController(AddProductModel addProductModel,AddProductView addProductView) {
         this.addProductModel=addProductModel;
         this.addProductView=addProductView;
-
-        scanner = new Scanner(System.in);
 
         proceedForProductInputs();
 
@@ -45,13 +40,12 @@ public class AddProductController {
                                         thresholdQuantity,
                                         price
                                      );
-        Inventory.addProductToInventory(product);
+        addProductModel.addProductToInventory(product);
     }
 
     private void requestProductName() {
         addProductView.requestProductName();
         try {
-            readTextInput();
             checkProductName();
         }catch (IllegalArgumentException e){
             addProductView.printExceptionMessage(e);
@@ -60,9 +54,9 @@ public class AddProductController {
     }
 
     private void checkProductName() throws IllegalArgumentException{
-        String productName = addProductModel.getEnteredText();
+        String productName = addProductModel.getTextInput();
         if(ProductHelper.getProductNameShortcomings(productName).size()>0) throw new IllegalArgumentException("Invalid product name");
-        if(Inventory.doesProductExist(productName))  throw new IllegalArgumentException("Product already exists!!");
+        if(addProductModel.doesProductExist(productName))  throw new IllegalArgumentException("Product already exists!!");
         this.productName = productName;
     }
 
@@ -70,8 +64,7 @@ public class AddProductController {
         addProductView.requestProductMeasurement(Measurement.getValues().toString());
 
         try {
-            readTextInput();
-            String measurementString = addProductModel.getEnteredText();
+            String measurementString = addProductModel.getTextInput();
             if(!Measurement.getValues().contains(measurementString)) throw new Exception();
             this.measurement = Measurement.getMeasurementByValue(measurementString);
         }catch (Exception e){
@@ -83,10 +76,7 @@ public class AddProductController {
     private void askThresholdQuantity() {
         addProductView.requestProductThresholdQuantity();
         try {
-            readNumberInput();
-            BigDecimal thresholdQuantity;
-            thresholdQuantity = new BigDecimal(addProductModel.getEnteredNumber().toString());
-            this.thresholdQuantity = thresholdQuantity;
+            this.thresholdQuantity = addProductModel.getNumberInput();
         }catch (NumberFormatException e){
             addProductView.showInvalidInput();
             askThresholdQuantity();
@@ -96,36 +86,12 @@ public class AddProductController {
     private void askPrice() {
         addProductView.requestProductPrice();
         try {
-            readNumberInput();
-            BigDecimal price;
-            price = new BigDecimal(addProductModel.getEnteredNumber().toString());
-            this.price = price;
+            this.price = addProductModel.getNumberInput();
         }catch (NumberFormatException e){
             addProductView.showInvalidInput();
             askPrice();
         }
     }
 
-    private void readTextInput() throws IllegalArgumentException{
-        String input = scanner.nextLine();
-        try {
-            if(input.trim().isBlank()) throw new IllegalArgumentException("Nothing Entered");
-            addProductModel.setEnteredText(input.trim());
-        }catch (IllegalArgumentException exception){
-            addProductView.printExceptionMessage(exception);
-            addProductModel.setEnteredText("");
-            throw new IllegalArgumentException("Nothing Entered");
-        }
-    }
 
-    private void readNumberInput() throws NumberFormatException{
-        String input = scanner.nextLine();
-        try {
-            addProductModel.setEnteredNumber(new BigDecimal(input.trim()));
-            if(new BigDecimal(input.trim()).compareTo(BigDecimal.ZERO) < 0) throw new NumberFormatException();
-        }catch (NumberFormatException exception){
-            addProductModel.setEnteredNumber(BigDecimal.valueOf(-1));
-            throw new NumberFormatException();
-        }
-    }
 }

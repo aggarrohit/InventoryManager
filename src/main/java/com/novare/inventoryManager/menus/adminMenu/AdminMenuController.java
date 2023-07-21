@@ -4,7 +4,10 @@ import com.novare.inventoryManager.auth.Registrator;
 import com.novare.inventoryManager.auth.Validator;
 import com.novare.inventoryManager.employees.Employee;
 import com.novare.inventoryManager.employees.EmployeeRole;
+import com.novare.inventoryManager.groupChat.GroupChat;
 import com.novare.inventoryManager.inventory.Inventory;
+import com.novare.inventoryManager.order.SalesOrderInventory;
+import com.novare.inventoryManager.reports.SalesStatisticsReport;
 import com.novare.inventoryManager.utils.Menu;
 import com.novare.inventoryManager.utils.Storage;
 
@@ -16,10 +19,12 @@ class AdminMenuController {
     private final AdminMenuModel model;
     private final AdminMenuView view;
     private final Scanner scanner;
-    AdminMenuController(AdminMenuModel model, AdminMenuView view) {
+    private final Employee employee;
+    AdminMenuController(AdminMenuModel model, AdminMenuView view,Employee employee) {
         this.model = model;
         this.view = view;
         this.scanner = new Scanner(System.in);
+        this.employee = employee;
     }
 
     void requestUserInput() {
@@ -30,7 +35,7 @@ class AdminMenuController {
             handleOption(selectedOption);
         }
         catch (NumberFormatException | IndexOutOfBoundsException exception) {
-                Menu.printInvalidOption();
+            Menu.printInvalidOption();
         }
         catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
@@ -46,10 +51,12 @@ class AdminMenuController {
                     Storage storage = new Storage();
                     view.printEmployeesTable(storage.getEmployees());
                 }
-
                 case 4 -> Inventory.listInventory();
-                case 5 -> System.out.println("TODO: Generate report"); //sprint 2
-                case 6 -> System.out.println("TODO: Open the group chat"); // sprint 2
+                case 5 -> {
+                    SalesOrderInventory salesOrderInventory = new SalesOrderInventory();
+                    SalesStatisticsReport.generate(salesOrderInventory.getMostSoldItemsStatistics());
+                }
+                case 6 -> new GroupChat(employee);
 
                 case 7 -> Menu.redirectToHomeMenu();
                 default -> Menu.printInvalidOption();
@@ -102,7 +109,7 @@ class AdminMenuController {
             newEmployee = registrator.registerEmployee(fullName, socialNumber, salary, role);
 
             if (newEmployee != null) {
-               view.printRegisterSuccessMessage();
+                view.printRegisterSuccessMessage();
                 return true;
             }
         }

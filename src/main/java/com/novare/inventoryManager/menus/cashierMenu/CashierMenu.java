@@ -6,7 +6,7 @@ public class CashierMenu {
     public CashierMenu(Employee employee) {
         CashierMenuModel model = new CashierMenuModel();
         CashierMenuView view = new CashierMenuView(employee, model.menuOptions);
-        CashierMenuController controller = new CashierMenuController(model, view);
+        CashierMenuController controller = new CashierMenuController(model, view, employee);
 
         controller.requestUserInput();
     }

@@ -1,4 +1,4 @@
-package com.novare.inventoryManager.product;
+package com.novare.inventoryManager.product.addProduct;
 
 public class AddProduct {
     public AddProduct() {

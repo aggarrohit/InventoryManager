@@ -2,6 +2,7 @@ package com.novare.inventoryManager.inventory;
 
 import com.novare.inventoryManager.notification.NotificationsImpl;
 import com.novare.inventoryManager.product.Product;
+import com.novare.inventoryManager.utils.ConsoleMessage;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -13,8 +14,7 @@ public class InventoryFileHelper {
 
     private static final String PATH_TO_INVENTORY_FILE = PATH_TO_ASSETS + "/inventory.txt";
 
-    private InventoryFileHelper() {
-    }
+    private InventoryFileHelper() {}
 
 
     public static List<Product> getProducts() throws FileNotFoundException {
@@ -59,7 +59,7 @@ public class InventoryFileHelper {
             if(productsWithSameName!=0) return true;
 
         } catch (FileNotFoundException e) {
-            System.out.println("Inventory file not found.");
+            ConsoleMessage.showErrorMessage("Inventory file not found.");
         }
 
         return false;
@@ -96,6 +96,16 @@ public class InventoryFileHelper {
         Product updatedProduct = replaceThresholdQuantityInProduct(product,updatedThresholdQty);
         updateProduct(updatedProduct);
         checkInventoryThreshold(updatedProduct);
+
+    }
+
+    public static void updatePrice(UUID productId,BigDecimal price) throws NoSuchElementException {
+
+        Product product = getProductByProductId(productId);
+        if(product==null) throw new NoSuchElementException("Product not found");
+
+        Product updatedProduct = replacePriceInProduct(product,price);
+        updateProduct(updatedProduct);
 
     }
 
@@ -156,7 +166,7 @@ public class InventoryFileHelper {
         notificationsImpl.createNotification(product.product_name()+" threshold quantity reached.",product.id());
     }
 
-    private static Product getProductByProductId(UUID productId) throws IndexOutOfBoundsException{
+    public static Product getProductByProductId(UUID productId) throws IndexOutOfBoundsException{
 
         try {
             List<Product> productsWithSameId =  getProducts().stream()
@@ -168,7 +178,7 @@ public class InventoryFileHelper {
             return productsWithSameId.get(0);
 
         } catch (FileNotFoundException e) {
-            System.out.println("Inventory file not found.");
+            ConsoleMessage.showErrorMessage("Inventory file not found.");
         }
 
         return null;
@@ -191,6 +201,16 @@ public class InventoryFileHelper {
                 product.quantity(),
                 updatedThresholdQty,
                 product.price()
+        );
+    }
+
+    private static Product replacePriceInProduct(Product product,BigDecimal updatedPrice){
+        return new Product( product.id(),
+                product.product_name(),
+                product.measurement(),
+                product.quantity(),
+                product.threshold_qty(),
+                updatedPrice
         );
     }
 
