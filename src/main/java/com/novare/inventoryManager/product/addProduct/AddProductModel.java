@@ -1,14 +1,16 @@
 package com.novare.inventoryManager.product.addProduct;
 
 import com.novare.inventoryManager.inventory.Inventory;
+import com.novare.inventoryManager.inventory.Measurement;
 import com.novare.inventoryManager.product.Product;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class AddProductModel {
 
-    Scanner scanner;
+    final Scanner scanner;
 
     public AddProductModel(){
         scanner = new Scanner(System.in);
@@ -33,5 +35,16 @@ public class AddProductModel {
 
     public boolean doesProductExist(String productName) {
         return Inventory.doesProductExist(productName);
+    }
+
+    public void addProductToInventory(String productName, Measurement measurement, BigDecimal thresholdQuantity, BigDecimal price){
+        Product product = new Product(  UUID.randomUUID(),
+                productName,
+                measurement,
+                BigDecimal.ZERO,
+                thresholdQuantity,
+                price
+        );
+        Inventory.addProductToInventory(product);
     }
 }
