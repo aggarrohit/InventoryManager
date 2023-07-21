@@ -52,7 +52,6 @@ public class Inventory {
                         InventoryFileHelper.updateQuantity(product.id(),updatedQuantity);
                     }
                 }
-
             }
         );
 

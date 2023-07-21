@@ -1,6 +1,7 @@
 package com.novare.inventoryManager.product.updateProduct;
 
 import com.novare.inventoryManager.inventory.Inventory;
+import com.novare.inventoryManager.utils.ConsoleMessage;
 
 public class UpdateProductView {
     public void requestProductNumber(String fieldToUpdate) {
@@ -16,11 +17,11 @@ public class UpdateProductView {
     }
 
     public void showInvalidInput() {
-        System.out.println("Invalid input!!");
+        ConsoleMessage.showErrorMessage("Invalid input!!");
     }
 
     public void showSuccessMessage() {
-        System.out.println("Product updated successfully!!");
+        ConsoleMessage.showSuccessMessage("Product updated successfully!!");
     }
 
     public void listInventory(){

@@ -1,6 +1,5 @@
 package com.novare.inventoryManager.integration;
 
-
 import com.novare.inventoryManager.inventory.Measurement;
 
 import java.math.BigDecimal;

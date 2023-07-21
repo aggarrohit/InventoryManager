@@ -15,7 +15,7 @@ class CashierMenuController {
     private final Scanner scanner;
     private final Employee employee;
 
-    CashierMenuController(CashierMenuModel model, CashierMenuView view,Employee  employee) {
+    CashierMenuController(CashierMenuModel model, CashierMenuView view, Employee employee) {
         this.model = model;
         this.view = view;
         this.scanner = new Scanner(System.in);
