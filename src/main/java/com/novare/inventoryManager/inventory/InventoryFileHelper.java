@@ -99,6 +99,16 @@ public class InventoryFileHelper {
 
     }
 
+    public static void updatePrice(UUID productId,BigDecimal price) throws NoSuchElementException {
+
+        Product product = getProductByProductId(productId);
+        if(product==null) throw new NoSuchElementException("Product not found");
+
+        Product updatedProduct = replacePriceInProduct(product,price);
+        updateProduct(updatedProduct);
+
+    }
+
     public static synchronized void updateProduct(Product updatedProduct) {
 
         try {
@@ -191,6 +201,16 @@ public class InventoryFileHelper {
                 product.quantity(),
                 updatedThresholdQty,
                 product.price()
+        );
+    }
+
+    private static Product replacePriceInProduct(Product product,BigDecimal updatedPrice){
+        return new Product( product.id(),
+                product.product_name(),
+                product.measurement(),
+                product.quantity(),
+                product.threshold_qty(),
+                updatedPrice
         );
     }
 

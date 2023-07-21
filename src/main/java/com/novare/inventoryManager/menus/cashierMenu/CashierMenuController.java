@@ -1,5 +1,7 @@
 package com.novare.inventoryManager.menus.cashierMenu;
 
+import com.novare.inventoryManager.employees.Employee;
+import com.novare.inventoryManager.groupChat.GroupChat;
 import com.novare.inventoryManager.inventory.Inventory;
 import com.novare.inventoryManager.saleOrder.SalesOrderMain;
 import com.novare.inventoryManager.utils.Menu;
@@ -11,11 +13,13 @@ class CashierMenuController {
     private final CashierMenuModel model;
     private final CashierMenuView view;
     private final Scanner scanner;
+    private final Employee employee;
 
-    CashierMenuController(CashierMenuModel model, CashierMenuView view) {
+    CashierMenuController(CashierMenuModel model, CashierMenuView view,Employee  employee) {
         this.model = model;
         this.view = view;
         this.scanner = new Scanner(System.in);
+        this.employee = employee;
     }
 
     void requestUserInput() {
@@ -39,8 +43,7 @@ class CashierMenuController {
 
                 case 1 -> Inventory.listInventory();
                 case 2 -> new SalesOrderMain("createSalesOrder");
-                case 3 -> System.out.println("TODO: Open the group chat"); // sprint 2
-
+                case 3 -> new GroupChat(employee);
                 case 4 -> Menu.redirectToHomeMenu();
                 default -> Menu.printInvalidOption();
             }

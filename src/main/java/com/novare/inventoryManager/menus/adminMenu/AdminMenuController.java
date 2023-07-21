@@ -4,6 +4,7 @@ import com.novare.inventoryManager.auth.Registrator;
 import com.novare.inventoryManager.auth.Validator;
 import com.novare.inventoryManager.employees.Employee;
 import com.novare.inventoryManager.employees.EmployeeRole;
+import com.novare.inventoryManager.groupChat.GroupChat;
 import com.novare.inventoryManager.inventory.Inventory;
 import com.novare.inventoryManager.utils.Menu;
 
@@ -15,10 +16,12 @@ class AdminMenuController {
     private final AdminMenuModel model;
     private final AdminMenuView view;
     private final Scanner scanner;
-    AdminMenuController(AdminMenuModel model, AdminMenuView view) {
+    private final Employee employee;
+    AdminMenuController(AdminMenuModel model, AdminMenuView view,Employee employee) {
         this.model = model;
         this.view = view;
         this.scanner = new Scanner(System.in);
+        this.employee=employee;
     }
 
     void requestUserInput() {
@@ -44,7 +47,7 @@ class AdminMenuController {
 
                 case 3 -> Inventory.listInventory();
                 case 4 -> System.out.println("TODO: Generate report"); //sprint 2
-                case 5 -> System.out.println("TODO: Open the group chat"); // sprint 2
+                case 5 -> new GroupChat(employee); // sprint 2
 
                 case 6 -> Menu.redirectToHomeMenu();
                 default -> Menu.printInvalidOption();

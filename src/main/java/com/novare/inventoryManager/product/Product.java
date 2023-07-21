@@ -9,13 +9,11 @@ public record Product(UUID id, String product_name, Measurement measurement, Big
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(id).append(",")
-                .append(product_name).append(",")
-                .append(measurement.getMeasurement()).append(",")
-                .append(quantity).append(",")
-                .append(threshold_qty).append(",")
-                .append(price);
-        return stringBuilder.toString();
+        return  id + "," +
+                product_name + "," +
+                measurement.getMeasurement() + "," +
+                quantity + "," +
+                threshold_qty + "," +
+                price;
     }
 }
