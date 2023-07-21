@@ -166,7 +166,7 @@ public class InventoryFileHelper {
         notificationsImpl.createNotification(product.product_name()+" threshold quantity reached.",product.id());
     }
 
-    private static Product getProductByProductId(UUID productId) throws IndexOutOfBoundsException{
+    public static Product getProductByProductId(UUID productId) throws IndexOutOfBoundsException{
 
         try {
             List<Product> productsWithSameId =  getProducts().stream()

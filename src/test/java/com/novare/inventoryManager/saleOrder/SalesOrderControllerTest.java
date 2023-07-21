@@ -1,6 +1,6 @@
 package com.novare.inventoryManager.saleOrder;
 
-import com.novare.inventoryManager.data.order.SalesOrder;
+import com.novare.inventoryManager.order.SalesOrder;
 import com.novare.inventoryManager.product.Product;
 import com.novare.inventoryManager.purchaseOrder.InventoryDummyData;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,12 +47,13 @@ public class SalesOrderControllerTest {
         when(mockModel.getInventoryProducts()).thenReturn(inventory);
 
         // Set up user inputs
-        when(mockView.getInput("Enter the customer name: ")).thenReturn("Customer ABC"); // Set customer name
+        when(mockView.getInput("Enter the customer name")).thenReturn("Customer ABC"); // Set customer name
         when(mockView.getIntNumericUserInput("""
+                
                 Sales order details
-                Enter the item number:\s""")).thenReturn(1); // Select item number 1
-        when(mockView.getBigDecimalNumericUserInput("Enter the quantity: ")).thenReturn(BigDecimal.valueOf(5)); // Set quantity as 5
-        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N): ")).thenReturn(false); // Add more items: No
+                Enter the item number\s""")).thenReturn(1); // Select item number 1
+        when(mockView.getBigDecimalNumericUserInput("Enter the quantity")).thenReturn(BigDecimal.valueOf(5)); // Set quantity as 5
+        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N)")).thenReturn(false); // Add more items: No
 
         // Execute the test case
         controller.createSalesOrder();
@@ -61,7 +62,7 @@ public class SalesOrderControllerTest {
         verify(mockModel).addSalesOrderToOrderInventory(Mockito.anyList());
         verify(mockModel).updateProductQuantityById(Mockito.any(), Mockito.any());
         verify(mockView).displaySalesOrder(Mockito.anyList());
-        verify(mockView, times(2)).displayInventory(Mockito.anyList());
+        verify(mockView, times(1)).displayInventory(Mockito.anyList());
 
         // Assertion
         ArgumentCaptor<List<SalesOrder>> captor = ArgumentCaptor.forClass(List.class);
@@ -85,12 +86,13 @@ public class SalesOrderControllerTest {
         when(mockModel.getInventoryProducts()).thenReturn(inventory);
 
         // Set up user inputs
-        when(mockView.getInput("Enter the customer name: ")).thenReturn("Customer ABC"); // Set customer name
+        when(mockView.getInput("Enter the customer name")).thenReturn("Customer ABC"); // Set customer name
         when(mockView.getIntNumericUserInput("""
+            
             Sales order details
-            Enter the item number:\s""")).thenReturn(1, 2); // Select item numbers 1 and 2
-        when(mockView.getBigDecimalNumericUserInput("Enter the quantity: ")).thenReturn(BigDecimal.valueOf(5), BigDecimal.valueOf(3)); // Set quantities
-        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N): ")).thenReturn(true, false); // Add more items: Yes, No
+            Enter the item number\s""")).thenReturn(1, 2); // Select item numbers 1 and 2
+        when(mockView.getBigDecimalNumericUserInput("Enter the quantity")).thenReturn(BigDecimal.valueOf(5), BigDecimal.valueOf(3)); // Set quantities
+        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N)")).thenReturn(true, false); // Add more items: Yes, No
 
         // Execute the test case
         controller.createSalesOrder();
@@ -99,7 +101,7 @@ public class SalesOrderControllerTest {
         verify(mockModel).addSalesOrderToOrderInventory(Mockito.anyList());
         verify(mockModel, times(2)).updateProductQuantityById(Mockito.any(), Mockito.any());
         verify(mockView).displaySalesOrder(Mockito.anyList());
-        verify(mockView, times(2)).displayInventory(Mockito.anyList());
+        verify(mockView, times(1)).displayInventory(Mockito.anyList());
 
         // Assertion
         ArgumentCaptor<List<SalesOrder>> captor = ArgumentCaptor.forClass(List.class);
@@ -123,12 +125,13 @@ public class SalesOrderControllerTest {
         when(mockModel.getInventoryProducts()).thenReturn(inventory);
 
         // Set up user inputs
-        when(mockView.getInput("Enter the customer name: ")).thenReturn("Customer ABC"); // Set customer name
+        when(mockView.getInput("Enter the customer name")).thenReturn("Customer ABC"); // Set customer name
         when(mockView.getIntNumericUserInput("""
+                
                 Sales order details
-                Enter the item number:\s""")).thenReturn(0, 2, 1); // Select invalid item number
-        when(mockView.getBigDecimalNumericUserInput("Enter the quantity: ")).thenReturn(BigDecimal.valueOf(5)); // Set quantity as 5
-        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N): ")).thenReturn(false); // Add more items: No
+                Enter the item number\s""")).thenReturn(0, 2, 1); // Select invalid item number
+        when(mockView.getBigDecimalNumericUserInput("Enter the quantity")).thenReturn(BigDecimal.valueOf(5)); // Set quantity as 5
+        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N)")).thenReturn(false); // Add more items: No
 
         // Execute the test case
         controller.createSalesOrder();
@@ -145,12 +148,13 @@ public class SalesOrderControllerTest {
         when(mockModel.getInventoryProducts()).thenReturn(inventory);
 
         // Set up user inputs
-        when(mockView.getInput("Enter the customer name: ")).thenReturn("Customer ABC"); // Set customer name
+        when(mockView.getInput("Enter the customer name")).thenReturn("Customer ABC"); // Set customer name
         when(mockView.getIntNumericUserInput("""
+                
                 Sales order details
-                Enter the item number:\s""")).thenReturn(1); // Select item number 1
-        when(mockView.getBigDecimalNumericUserInput("Enter the quantity: ")).thenReturn(BigDecimal.ZERO, BigDecimal.valueOf(5)); // Set invalid quantity
-        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N): ")).thenReturn(false); // Add more items: No
+                Enter the item number\s""")).thenReturn(1); // Select item number 1
+        when(mockView.getBigDecimalNumericUserInput("Enter the quantity")).thenReturn(BigDecimal.ZERO, BigDecimal.valueOf(5)); // Set invalid quantity
+        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N)")).thenReturn(false); // Add more items: No
 
         // Execute the test case
         controller.createSalesOrder();
@@ -167,12 +171,13 @@ public class SalesOrderControllerTest {
         when(mockModel.getInventoryProducts()).thenReturn(inventory);
 
         // Set up user inputs
-        when(mockView.getInput("Enter the customer name: ")).thenReturn("Customer ABC"); // Set customer name
+        when(mockView.getInput("Enter the customer name")).thenReturn("Customer ABC"); // Set customer name
         when(mockView.getIntNumericUserInput("""
+                
                 Sales order details
-                Enter the item number:\s""")).thenReturn(1); // Select item number 1
-        when(mockView.getBigDecimalNumericUserInput("Enter the quantity: ")).thenReturn(BigDecimal.valueOf(20),BigDecimal.valueOf(10)); // Set quantity as 10
-        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N): ")).thenReturn(false); // Add more items: No
+                Enter the item number\s""")).thenReturn(1); // Select item number 1
+        when(mockView.getBigDecimalNumericUserInput("Enter the quantity")).thenReturn(BigDecimal.valueOf(20),BigDecimal.valueOf(10)); // Set quantity as 10
+        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N)")).thenReturn(false); // Add more items: No
 
         // Execute the test case
         controller.createSalesOrder();
@@ -188,12 +193,13 @@ public class SalesOrderControllerTest {
         when(mockModel.getInventoryProducts()).thenReturn(inventory);
 
         // Set up user inputs
-        when(mockView.getInput("Enter the customer name: ")).thenReturn("Customer ABC"); // Set customer name
+        when(mockView.getInput("Enter the customer name")).thenReturn("Customer ABC"); // Set customer name
         when(mockView.getIntNumericUserInput("""
+                
                 Sales order details
-                Enter the item number:\s""")).thenReturn(1); // Select item number 1
-        when(mockView.getBigDecimalNumericUserInput("Enter the quantity: ")).thenReturn(BigDecimal.valueOf(5)); // Set quantity as 5
-        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N): ")).thenReturn(false);
+                Enter the item number\s""")).thenReturn(1); // Select item number 1
+        when(mockView.getBigDecimalNumericUserInput("Enter the quantity")).thenReturn(BigDecimal.valueOf(5)); // Set quantity as 5
+        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N)")).thenReturn(false);
 
         // Number of threads to execute concurrently
         int numThreads = 10;
@@ -230,17 +236,18 @@ public class SalesOrderControllerTest {
         // Set up user inputs for both customers
         String customerName1 = "Customer ABC";
         String customerName2 = "Customer XYZ";
-        when(mockView.getInput("Enter the customer name: "))
+        when(mockView.getInput("Enter the customer name"))
                 .thenReturn(customerName1, customerName2);
 
         when(mockView.getIntNumericUserInput("""
+        
         Sales order details
-        Enter the item number:\s""")).thenReturn(1); // Select item number 1
+        Enter the item number\s""")).thenReturn(1); // Select item number 1
 
-        when(mockView.getBigDecimalNumericUserInput("Enter the quantity: "))
+        when(mockView.getBigDecimalNumericUserInput("Enter the quantity"))
                 .thenReturn(BigDecimal.valueOf(10)); // Set quantity as 10 for both customers
 
-        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N): "))
+        when(mockView.getYesNoUserInput("Do you want to add more items? (Y/N)"))
                 .thenReturn(false); // Add more items: No
 
         // Number of threads to execute concurrently

@@ -13,6 +13,8 @@ class ManagerMenuModel {
             "View notifications",
             "Export transaction list",
             "Open the group chat",
+            "View Sales Orders",
+            "View Purchase Orders",
             "Sign out"
     );
 }
