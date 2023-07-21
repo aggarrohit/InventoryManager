@@ -46,7 +46,6 @@ public class Menu {
     }
 
     public static void displayMenu(List<String> menuOptions) {
-        ConsoleMessage.clearConsole();
 
         Menu.printLine();
         Menu.printOptions(menuOptions);
