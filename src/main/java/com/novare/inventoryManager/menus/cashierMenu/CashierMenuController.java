@@ -1,9 +1,7 @@
 package com.novare.inventoryManager.menus.cashierMenu;
 
 import com.novare.inventoryManager.inventory.Inventory;
-import com.novare.inventoryManager.saleOrder.SalesOrderController;
-import com.novare.inventoryManager.saleOrder.SalesOrderModel;
-import com.novare.inventoryManager.saleOrder.SalesOrderView;
+import com.novare.inventoryManager.saleOrder.SalesOrderMain;
 import com.novare.inventoryManager.utils.Menu;
 
 import java.io.FileNotFoundException;
@@ -40,7 +38,7 @@ class CashierMenuController {
             switch (selectedOption) {
 
                 case 1 -> Inventory.listInventory();
-                case 2 -> new SalesOrderController(new SalesOrderModel(),new SalesOrderView()).createSalesOrder();
+                case 2 -> new SalesOrderMain("createSalesOrder");
                 case 3 -> System.out.println("TODO: Open the group chat"); // sprint 2
 
                 case 4 -> Menu.redirectToHomeMenu();
