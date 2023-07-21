@@ -1,11 +1,9 @@
 package com.novare.inventoryManager.product.addProduct;
 
 import com.novare.inventoryManager.inventory.Measurement;
-import com.novare.inventoryManager.product.Product;
 import com.novare.inventoryManager.product.ProductHelper;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 public class AddProductController {
 
@@ -28,20 +26,11 @@ public class AddProductController {
         askMeasurement();
         askThresholdQuantity();
         askPrice();
-        createProduct();
+        addProductModel.addProductToInventory(productName,measurement,thresholdQuantity,price);
         addProductView.showSuccessMessage();
     }
 
-    private void createProduct() {
-        Product product = new Product(  UUID.randomUUID(),
-                                        productName,
-                                        measurement,
-                                        BigDecimal.ZERO,
-                                        thresholdQuantity,
-                                        price
-                                     );
-        addProductModel.addProductToInventory(product);
-    }
+
 
     private void requestProductName() {
         addProductView.requestProductName();

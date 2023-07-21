@@ -1,26 +1,14 @@
-<<<<<<< HEAD
 5f2849b3-76ba-4793-b69e-91bf52cb1be2,apple,kg,0,10,22
 0bd89ca6-6177-4d8c-b1d2-175ef5c20cb4,casd,kg,2.0,1,5
 f9d1e457-cf2c-49bf-9620-125cf2876ed9,vadf,pc,0,0,3
 f91dabf6-791f-4dcd-83bb-1af84d0c981c,noti not,pc,0,4,1
-=======
-5f2849b3-76ba-4793-b69e-91bf52cb1be2,apple,kg,1.0,10,17
-0bd89ca6-6177-4d8c-b1d2-175ef5c20cb4,casd,kg,13.0,-1,1
-f9d1e457-cf2c-49bf-9620-125cf2876ed9,vadf,pc,4.0,0,1.32
-f91dabf6-791f-4dcd-83bb-1af84d0c981c,noti not,pc,0,2,1
->>>>>>> develop
 4ef8f7cf-0ab7-4dea-9b86-2ace7732d825,noti test,pc,2,5,1
 92d9fe51-7c93-4caa-8366-1fac5c7e5a2a,vfgb,pc,6.0,2,6
 3d08128b-9ec0-4e00-a46c-058d971d5b71,no noti,pc,0,2,7
 b7136818-d12c-4c40-bd4b-532882a8a3e0,test product inv,kg,2,5,25
-<<<<<<< HEAD
 e0ff7e90-e658-4d96-8370-262ab5cfec35,test product notification,kg,6,5,9
 6fbde047-a81a-41f5-ad74-44f3d3c11753,Apple,kg,3.0,6,122
 37c88896-a950-47ff-b398-86d563b7203b,Gift Watch,pc,0,5,1000
 664f4fc2-7591-4b7e-8451-7e6c3f508067,Apple pie,pc,0,10,4
 1f389f9b-9c3e-4f92-8419-8a2c3c01a45e,Apple jam,kg,0,11,12
-=======
-e0ff7e90-e658-4d96-8370-262ab5cfec35,test product notification,kg,6,5,25
-6fbde047-a81a-41f5-ad74-44f3d3c11753,Apple,kg,4.0,5,122
-e60660b5-1dcd-4724-9948-e5a6fe24ac4e,Iphone,pc,9.0,10,10000
->>>>>>> develop
+ed87b080-6666-4453-b35e-0e6f6cd1bc36,Green Apple,kg,0,2,11

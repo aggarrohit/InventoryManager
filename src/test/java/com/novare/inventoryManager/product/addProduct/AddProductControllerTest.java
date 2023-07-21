@@ -48,11 +48,11 @@ class AddProductControllerTest {
         );
 
 
-        inventory.add(product);
         doAnswer(invocationOnMock -> {
             inventory.add(product);
             return null;
-        }).when(mockModel).addProductToInventory(product);
+        }).when(mockModel).addProductToInventory(productNameInput, Measurement.getMeasurementByValue(measurementInput),
+                thresholdQuantity, price);
 
         when(mockModel.getTextInput()).thenReturn(productNameInput,measurementInput);
         when(mockModel.getNumberInput()).thenReturn(thresholdQuantity,price);

@@ -52,7 +52,6 @@ class GroupChatTest {
 
         doAnswer(invocationOnMock -> {
 
-            System.out.println("here 1");
             chats.add(message);
 
             return null;
